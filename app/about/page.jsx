@@ -9,7 +9,7 @@ import { site } from '@/lib/site';
 
 export const metadata = {
   title: 'About',
-  description: `Who ${site.name} is and how he works.`,
+  description: `Who ${site.name} is and how the work gets done.`,
 };
 
 export default function AboutPage() {
@@ -76,7 +76,7 @@ export default function AboutPage() {
                   paddingTop: 26,
                 }}
               >
-                {(page.stats || []).map((s, i) => (
+                {site.stats.map((s, i) => (
                   <Stat
                     key={s.label}
                     value={s.value}

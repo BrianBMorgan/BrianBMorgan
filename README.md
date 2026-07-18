@@ -27,7 +27,7 @@ No CMS, no database — add or edit files and commit.
 | Work project | `content/work/<development\|events\|design>/<slug>.mdx` |
 | Essay | `content/thought-leadership/<slug>.mdx` |
 | About page | `content/pages/about.mdx` |
-| Name, email, socials, availability | `lib/site.js` |
+| Name, email, socials, availability, KPI stats | `lib/site.js` |
 | Work categories (labels, colors) | `lib/categories.js` |
 | Images / videos | `public/images/…`, `public/videos/…` |
 
