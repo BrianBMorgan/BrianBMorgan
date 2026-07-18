@@ -11,10 +11,13 @@ name: Gated Auto-Merge
 #   2. Arms auto-merge only when a review has been submitted AND every review
 #      thread is resolved. Addressing a comment isn't enough; the thread must
 #      be marked resolved on GitHub.
-#   3. Disarms auto-merge whenever a thread goes back to unresolved.
-#   4. Sweeps every 15 minutes and arms PRs older than 10 minutes that have
-#      no review at all, so merging degrades gracefully if the review bot
-#      stops posting entirely.
+#   3. Disarms auto-merge whenever the gate runs and finds unresolved threads.
+#   4. Re-evaluates on review submission, on manual dispatch, and on a
+#      15-minute sweep. Thread resolutions have no Actions trigger of their
+#      own (pull_request_review_thread is a webhook event, not a workflow
+#      trigger), so after resolving threads, dispatch this workflow or let
+#      the sweep pick it up. The sweep also arms review-less PRs older than
+#      10 minutes so a silent review bot cannot block merging.
 #
 # Merge-commit method: squash + rebase are disabled repo-wide so that a
 # development → main promotion keeps `development` as an ancestor of `main`
@@ -25,8 +28,7 @@ on:
     types: [opened, reopened, ready_for_review]
   pull_request_review:
     types: [submitted]
-  pull_request_review_thread:
-    types: [resolved, unresolved]
+  workflow_dispatch:
   schedule:
     - cron: '*/15 * * * *'
 
@@ -58,7 +60,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          if [ "$EVENT_NAME" = "schedule" ]; then
+          if [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             prs=$(gh pr list --repo "$REPO" --base main --state open --json number --jq '.[].number')
           else
             prs="$EVENT_PR"
@@ -107,10 +109,10 @@ jobs:
               continue
             fi
 
-            # No unresolved threads. Arm once a review exists; on the scheduled
-            # sweep, also arm review-less PRs older than 10 minutes so a silent
-            # review bot can't block merging forever.
-            if [ "$reviews" -gt 0 ] || { [ "$EVENT_NAME" = "schedule" ] && [ "$ageSeconds" -gt 600 ]; }; then
+            # No unresolved threads. Arm once a review exists; on sweeps and
+            # manual dispatches, also arm review-less PRs older than 10 minutes
+            # so a silent review bot can't block merging forever.
+            if [ "$reviews" -gt 0 ] || { [ "$EVENT_NAME" != "pull_request" ] && [ "$EVENT_NAME" != "pull_request_review" ] && [ "$ageSeconds" -gt 600 ]; }; then
               if [ "$armed" = "true" ]; then
                 echo "PR #$pr: already armed."
               else
