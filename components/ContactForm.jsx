@@ -26,6 +26,7 @@ export function ContactForm() {
     setKind('');
     setBrief('');
     setCompany('');
+    setErr(false);
   };
 
   // Used by the fallback screen as a real link: browsers block programmatic
@@ -52,7 +53,7 @@ export function ContactForm() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, kind, brief, company }),
-        signal: AbortSignal.timeout(8000),
+        signal: typeof AbortSignal.timeout === 'function' ? AbortSignal.timeout(8000) : undefined,
       });
       if (!res.ok) throw new Error(`contact endpoint ${res.status}`);
       setStatus('sent');
@@ -113,7 +114,13 @@ export function ContactForm() {
           )}
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            submit();
+          }}
+          style={{ display: 'flex', flexDirection: 'column', gap: 18 }}
+        >
           <Input
             label="Name"
             placeholder="Your name"
@@ -159,16 +166,16 @@ export function ContactForm() {
             />
           </div>
           <Button
+            type="submit"
             variant="primary"
             size="lg"
             fullWidth
             disabled={status === 'sending'}
             iconRight={<Send size={17} />}
-            onClick={submit}
           >
             {status === 'sending' ? 'Sending…' : 'Send message'}
           </Button>
-        </div>
+        </form>
       )}
     </Card>
   );
