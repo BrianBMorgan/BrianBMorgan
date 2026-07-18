@@ -35,7 +35,7 @@ export default async function WorkCategoryPage({ params }) {
           </div>
         ) : (
           <p style={{ color: 'var(--text-muted)' }}>
-            Nothing published here yet — drop a file into{' '}
+            Nothing published here yet. Drop a file into{' '}
             <code>content/work/{cat.slug}/</code> to add the first project.
           </p>
         )}
