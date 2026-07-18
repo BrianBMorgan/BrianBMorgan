@@ -11,7 +11,7 @@
 - GitHub Pages deploy is live and green: robots/sitemap declare force-static, plain `<img>`/`<video>` srcs are base-path aware via `lib/asset.js` + `NEXT_PUBLIC_BASE_PATH`. Build statically generates 20/20 pages.
 
 ## In flight
-- Nothing.
+- Contact form → Resend wiring. The form now POSTs to a public relay route on the ForgeOS mailforge service (`site.contactEndpoint`), with an 8s timeout, honeypot, and a click-through mailto fallback screen. The mailforge-side handler (`/public/portfolio-contact`, sends via Resend from portfolio@sandbox-xm.com to brian@sandbox-xm.com) is handed off as a drop-in file — ForgeOS lives outside this repo. Until it deploys, the form falls back to the mailto draft.
 - Wire the contact form to a real backend (currently composes a mailto: draft).
 - Later: self-host fonts with `next/font`; settle the long-term deploy target (GitHub Pages today; Vercel + custom domain an option) and make `site.url` match whichever wins.
 - Housekeeping candidates: prune ~32MB of unreferenced HiRes JPGs in `public/images/work/` (the web-sized derivatives are the ones the site uses); add a PR-time build check so automerge can't land a red build; delete the merged remote branches (`BrianBMorgan-patch-1`, `claude/brianbmorgan-design-folder-m8kg7w`).
