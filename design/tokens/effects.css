@@ -1,0 +1,35 @@
+/* ==========================================================================
+   EFFECTS — shadows, transitions & motion — Brian B Morgan
+   Shadows are warm-tinted (charcoal/brown), never pure black. Soft and
+   low — this system leans on hairline borders and paper texture more than
+   heavy elevation.
+   ========================================================================== */
+:root {
+  /* Warm-tinted shadows (charcoal base, low opacity) */
+  --shadow-xs: 0 1px 2px rgba(43, 39, 33, 0.06);
+  --shadow-sm: 0 1px 3px rgba(43, 39, 33, 0.08), 0 1px 2px rgba(43, 39, 33, 0.05);
+  --shadow-md: 0 4px 12px rgba(43, 39, 33, 0.10), 0 2px 4px rgba(43, 39, 33, 0.06);
+  --shadow-lg: 0 12px 28px rgba(43, 39, 33, 0.12), 0 4px 10px rgba(43, 39, 33, 0.07);
+  --shadow-xl: 0 24px 56px rgba(32, 29, 25, 0.16), 0 8px 20px rgba(32, 29, 25, 0.08);
+
+  /* Inset & focus */
+  --shadow-inset: inset 0 1px 2px rgba(43, 39, 33, 0.08);
+  --focus-ring-shadow: 0 0 0 3px rgba(74, 117, 155, 0.35);
+
+  /* Rings for accent buttons */
+  --ring-gold: 0 0 0 3px rgba(192, 154, 58, 0.30);
+
+  /* Motion — measured, confident, never bouncy */
+  --ease-standard: cubic-bezier(0.2, 0.0, 0.1, 1); /* @kind other */
+  --ease-out:      cubic-bezier(0.16, 0.84, 0.24, 1); /* @kind other */
+  --ease-in:       cubic-bezier(0.5, 0, 0.9, 0.3); /* @kind other */
+
+  --dur-fast:   120ms; /* @kind other */
+  --dur-base:   200ms; /* @kind other */
+  --dur-slow:   320ms; /* @kind other */
+  --dur-slower: 500ms; /* @kind other */
+
+  /* Overlay / scrim */
+  --scrim: rgba(32, 29, 25, 0.52);
+  --blur-panel: saturate(120%) blur(10px); /* @kind other */
+}

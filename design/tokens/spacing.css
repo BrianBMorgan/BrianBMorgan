@@ -1,0 +1,48 @@
+/* ==========================================================================
+   SPACING, RADII & LAYOUT — Brian B Morgan
+   4px base grid. Radii stay restrained — this is a tailored, editorial
+   system, not a rounded/bubbly one.
+   ========================================================================== */
+:root {
+  /* Spacing scale (4px base) */
+  --space-0:  0;
+  --space-1:  0.25rem;  /* 4 */
+  --space-2:  0.5rem;   /* 8 */
+  --space-3:  0.75rem;  /* 12 */
+  --space-4:  1rem;     /* 16 */
+  --space-5:  1.5rem;   /* 24 */
+  --space-6:  2rem;     /* 32 */
+  --space-7:  2.5rem;   /* 40 */
+  --space-8:  3rem;     /* 48 */
+  --space-9:  4rem;     /* 64 */
+  --space-10: 5rem;     /* 80 */
+  --space-11: 6.5rem;   /* 104 */
+  --space-12: 8rem;     /* 128 */
+
+  /* Radii — tight & tailored */
+  --radius-xs:  2px;
+  --radius-sm:  4px;
+  --radius-md:  6px;
+  --radius-lg:  10px;
+  --radius-xl:  16px;
+  --radius-pill: 999px;
+
+  /* Border widths */
+  --border-hair: 1px;
+  --border-thick: 2px;
+  --border-rule: 3px;   /* editorial section rules */
+
+  /* Layout */
+  --container-narrow: 42rem;   /* 672 — prose */
+  --container-base:   64rem;   /* 1024 */
+  --container-wide:   78rem;   /* 1248 */
+  --gutter: var(--space-5);
+
+  /* Z-index ladder */
+  --z-base: 1;       /* @kind other */
+  --z-raised: 10;    /* @kind other */
+  --z-sticky: 100;   /* @kind other */
+  --z-overlay: 1000; /* @kind other */
+  --z-modal: 1100;   /* @kind other */
+  --z-toast: 1200;   /* @kind other */
+}
