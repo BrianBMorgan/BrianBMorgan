@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { Card, Eyebrow, Tag } from '@/components/ds';
 import { getWorkCategory } from '@/lib/categories';
+import { asset } from '@/lib/asset';
 
 /**
  * Work tile — cover image when the item has one, otherwise a color field in
@@ -26,7 +27,7 @@ export function WorkCard({ item }) {
         >
           {item.cover ? (
             <img
-              src={item.cover}
+              src={asset(item.cover)}
               alt=""
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />

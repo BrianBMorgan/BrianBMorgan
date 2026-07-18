@@ -1,6 +1,7 @@
 # Working State
 
 ## Just shipped
+- Fixed the GitHub Pages deploy: robots/sitemap routes now declare force-static (the export-mode build was failing on them), and plain <img>/<video> srcs are base-path aware via lib/asset.js + the workflow passing NEXT_PUBLIC_BASE_PATH.
 - Type change: Spectral (serif) replaced by Work Sans everywhere — font tokens, Google Fonts import, design docs/guidelines/manifest, and the placeholder SVG covers. `--font-serif` keeps its name as a legacy alias.
 - Next.js 15 site scaffold: About, Work (Development / Events / Design), Thought Leadership, Contact. File-based MDX content in `content/` — no database. All 22 routes statically generated; build verified green and pages screenshot-checked against the design system.
 - `design/` — Brian B. Morgan design system (tokens, components, guidelines, UI kit). Consumed by the site via `design/styles.css` + `components/ds.js`.

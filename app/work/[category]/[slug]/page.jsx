@@ -6,6 +6,7 @@ import { ArrowLeft, ExternalLink } from '@/components/icons';
 import { Video } from '@/components/media/Video';
 import { mdxComponents } from '@/components/mdx-components';
 import { WORK_CATEGORIES, getWorkCategory, getWorkItem, getWorkItems } from '@/lib/content';
+import { asset } from '@/lib/asset';
 
 export function generateStaticParams() {
   return WORK_CATEGORIES.flatMap((c) =>
@@ -76,7 +77,7 @@ export default async function WorkItemPage({ params }) {
         >
           {item.cover ? (
             <img
-              src={item.cover}
+              src={asset(item.cover)}
               alt=""
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />

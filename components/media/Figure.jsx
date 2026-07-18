@@ -1,9 +1,11 @@
+import { asset } from '@/lib/asset';
+
 /** Image with an optional mono caption — for MDX bodies and case studies. */
 export function Figure({ src, alt = '', caption, style }) {
   return (
     <figure style={{ margin: 'var(--space-7) 0', ...style }}>
       <img
-        src={src}
+        src={asset(src)}
         alt={alt}
         style={{
           width: '100%',
