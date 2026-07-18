@@ -26,7 +26,7 @@ jobs:
       # Scoped to development-targeted PRs so development → main promotions to
       # production stay a manual, founder-gated merge rather than auto-merging.
       - name: Enable GitHub Auto-Merge
-        if: github.event.pull_request.base.ref == 'development'
+        if: github.event.pull_request.base.ref == 'main'
         run: gh pr merge --auto --merge "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
