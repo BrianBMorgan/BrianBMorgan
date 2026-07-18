@@ -36,7 +36,7 @@ How copy is written in this brand.
 ## Visual Foundations
 
 - **Colors.** A six-family warm palette. **Parchment** (`#FBF7EE`→`#D3BF95`) grounds every surface. **Charcoal** (`#201D19`→`#B0A895`) is a *warm* near-black for ink and deep sections. **Gold** (brass, `#A9832C` — not yellow) is the single primary accent. **Sage** (muted olive), **Rust** (warm terracotta), and **Deep Blue** (cool anchor, also links/focus) are the supporting accents. Max one or two saturated colors per view; let paper and ink carry the rest. Reference **semantic aliases** (`--surface-page`, `--text-body`, `--accent-primary`, `--link`) in code, not raw scales.
-- **Type.** Two families do the work. **Spectral** (a warm literary serif) for all display and headings, usually 600 with tight tracking (`-0.02em`); occasional italics for emphasis. **Archivo** (a sturdy grotesque sans) for UI and long-form body at 1.7 line-height. **IBM Plex Mono** for eyebrows, metadata, tags and code — always uppercase with wide tracking (`0.14em`) when used as a label. Serif + sans + mono is the signature contrast.
+- **Type.** Two families do the work. **Work Sans** (a clean modern grotesque) for all display and headings, usually 600 with tight tracking (`-0.02em`); occasional italics for emphasis. **Archivo** (a sturdy grotesque sans) for UI and long-form body at 1.7 line-height. **IBM Plex Mono** for eyebrows, metadata, tags and code — always uppercase with wide tracking (`0.14em`) when used as a label. With display and body both sans, contrast comes from weight, scale and the mono accent rather than a serif voice.
 - **Spacing.** 4px base grid (`--space-1`=4 … `--space-12`=128). Layouts are generous and airy — wide gutters, long measure (prose capped ~42rem), plenty of vertical rhythm.
 - **Backgrounds.** Flat parchment or flat charcoal — **no busy gradients or textures** in chrome. The *only* gradients used are subtle two-stop tonal fills inside portrait/project image placeholders (e.g. sage→deep-sage), standing in for real photography. Sections are full-bleed color bands (light parchment ↔ dark charcoal) separated by hairline or 3px editorial rules.
 - **Borders & rules.** Hairline `1px` borders (`--border-subtle`/`--border-default`) everywhere; a heavier **3px charcoal rule** (`--border-rule`) tops major sections as an editorial device. Corner radii stay **tight** (2–10px for most UI, 16px for large media, pill only for badges/round icon buttons). This is a tailored system, not a bubbly one.
@@ -69,7 +69,7 @@ How copy is written in this brand.
 - `README.md` — this guide. · `SKILL.md` — Agent-Skills-compatible wrapper.
 
 **`tokens/`** (all reachable from `styles.css`)
-- `fonts.css` — Google Fonts import (Spectral, Archivo, IBM Plex Mono).
+- `fonts.css` — Google Fonts import (Work Sans, Archivo, IBM Plex Mono).
 - `colors.css` — six color scales + semantic aliases.
 - `typography.css` — families, scale, weights, tracking, roles.
 - `spacing.css` — spacing grid, radii, borders, layout widths, z-index.
@@ -92,6 +92,6 @@ This is a from-scratch, brand-guidelines-driven system (no source component inve
 
 ## Caveats & substitutions
 
-1. **No logo / brand mark.** The source contained none. Wherever a mark would go, the name is set in Spectral type ("Brian B. Morgan"). **No logo was invented.** Provide one and it will be wired in.
-2. **Fonts are Google Fonts substitutions.** No font files were supplied, so Spectral / Archivo / IBM Plex Mono were chosen (deliberately *unlike* Anthropic/Claude branding) and loaded from Google Fonts — there are no local `@font-face` binaries. Share licensed brand fonts to replace them.
+1. **No logo / brand mark.** The source contained none. Wherever a mark would go, the name is set in Work Sans type ("Brian B. Morgan"). **No logo was invented.** Provide one and it will be wired in.
+2. **Fonts are Google Fonts substitutions.** No font files were supplied, so Work Sans / Archivo / IBM Plex Mono were chosen (deliberately *unlike* Anthropic/Claude branding) and loaded from Google Fonts — there are no local `@font-face` binaries. Share licensed brand fonts to replace them.
 3. **No real imagery.** Portrait and project images are tonal color-block placeholders. Swap in real photography when available.

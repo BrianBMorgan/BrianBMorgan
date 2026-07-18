@@ -1,13 +1,13 @@
 /* ==========================================================================
    TYPOGRAPHY — Brian B Morgan
-   Spectral (serif) leads for display & editorial voice.
+   Work Sans (grotesque sans) leads for display & editorial voice.
    Archivo (grotesque sans) carries UI & long-form body.
    IBM Plex Mono handles labels, metadata & code.
    ========================================================================== */
 :root {
   /* Families */
-  --font-display: 'Spectral', Georgia, 'Times New Roman', serif;
-  --font-serif:   'Spectral', Georgia, serif;
+  --font-display: 'Work Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif:   'Work Sans', system-ui, sans-serif; /* legacy alias — kept for compatibility since the serif was retired */
   --font-sans:    'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono:    'IBM Plex Mono', 'SF Mono', Menlo, monospace;
 
