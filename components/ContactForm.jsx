@@ -23,18 +23,21 @@ export function ContactForm() {
     setStatus('idle');
     setName('');
     setEmail('');
+    setKind('');
     setBrief('');
+    setCompany('');
   };
 
-  const mailtoFallback = () => {
+  // Used by the fallback screen as a real link: browsers block programmatic
+  // mailto: navigation once the click's user-activation window has expired.
+  const mailtoHref = () => {
     const subject = `Project inquiry${kind ? ` — ${kind}` : ''}`;
     const body = [`From: ${name} <${email}>`, kind && `Project type: ${kind}`, '', brief]
       .filter(Boolean)
       .join('\n');
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    setStatus('fallback');
+    return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+      body
+    )}`;
   };
 
   const submit = async () => {
@@ -49,11 +52,12 @@ export function ContactForm() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, kind, brief, company }),
+        signal: AbortSignal.timeout(8000),
       });
       if (!res.ok) throw new Error(`contact endpoint ${res.status}`);
       setStatus('sent');
     } catch {
-      mailtoFallback();
+      setStatus('fallback');
     }
   };
 
@@ -63,40 +67,50 @@ export function ContactForm() {
     <Card variant="paper" padding="lg">
       {done ? (
         <div style={{ textAlign: 'center', padding: '32px 12px' }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: '50%',
-              background: 'var(--sage-100)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 18,
-            }}
-          >
-            <Check size={26} color="var(--sage-700)" />
-          </div>
           {status === 'sent' ? (
             <>
+              <div
+                style={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: '50%',
+                  background: 'var(--sage-100)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 18,
+                }}
+              >
+                <Check size={26} color="var(--sage-700)" />
+              </div>
               <h3 style={{ fontSize: 26, margin: '0 0 8px' }}>Message sent</h3>
               <p style={{ color: 'var(--text-muted)', margin: '0 0 20px' }}>
                 Thanks, {name.split(' ')[0] || 'friend'}. It&apos;s in my inbox and I&apos;ll
                 reply to {email}.
               </p>
+              <Button variant="secondary" onClick={reset}>
+                Start another
+              </Button>
             </>
           ) : (
             <>
-              <h3 style={{ fontSize: 26, margin: '0 0 8px' }}>Over to your email app</h3>
+              <h3 style={{ fontSize: 26, margin: '0 0 8px' }}>That didn&apos;t send</h3>
               <p style={{ color: 'var(--text-muted)', margin: '0 0 20px' }}>
-                Thanks, {name.split(' ')[0] || 'friend'}. A drafted message just opened. If it
-                didn&apos;t, write me directly at {site.email}.
+                The relay didn&apos;t respond, so nothing went out yet. Open a drafted email
+                instead, or write me directly at {site.email}.
               </p>
+              <div
+                style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}
+              >
+                <Button as="a" href={mailtoHref()} variant="primary" iconRight={<Send size={16} />}>
+                  Open email draft
+                </Button>
+                <Button variant="secondary" onClick={() => setStatus('idle')}>
+                  Try again
+                </Button>
+              </div>
             </>
           )}
-          <Button variant="secondary" onClick={reset}>
-            Start another
-          </Button>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -133,9 +147,11 @@ export function ContactForm() {
             aria-hidden="true"
             style={{ position: 'absolute', left: -9999, width: 1, height: 1, overflow: 'hidden' }}
           >
+            {/* Non-semantic name: Chrome ignores autocomplete="off" for address
+                fields and would autofill an input named "company". */}
             <input
               type="text"
-              name="company"
+              name="pb_extra_field"
               tabIndex={-1}
               autoComplete="off"
               value={company}
