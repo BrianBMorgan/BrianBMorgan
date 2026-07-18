@@ -35,19 +35,19 @@ A work item's frontmatter:
 
 ```yaml
 ---
-title: Foundry OS
-kind: Product Platform        # eyebrow label; falls back to the category name
+title: Forge Intelligence
+kind: AI Platform             # eyebrow label; falls back to the category name
 summary: One-sentence description used on cards and as the case-study lede.
-date: 2025-09-12              # controls sort order
+date: 2026-07-18              # controls sort order (year is the display label)
 year: '2025'
-client: Foundry               # optional
-role: Design engineer         # optional
+client: Intel                 # optional
+role: 'Founder: product, design, and engineering'   # optional; quote if it contains a colon
 status: Live                  # Live | Delivered | Archived …
 featured: true                # surfaces it on the home page
-tags: [React, Design systems]
-cover: /images/work/foundry-os.svg   # optional; color field fallback without it
+tags: [AI, SaaS]
+cover: /images/work/FI-landing.png   # optional; color field fallback without it
 video: /videos/demo.mp4       # optional; replaces the cover with a player
-link: https://example.com     # optional "Visit" button
+link: https://forgeintelligence.ai   # optional "Visit" button
 draft: true                   # optional; hides the file from every list
 ---
 ```
