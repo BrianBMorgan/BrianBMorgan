@@ -8,7 +8,7 @@ import { getArticles, getFeaturedWork, readingTime } from '@/lib/content';
 import { site } from '@/lib/site';
 
 export default function HomePage() {
-  const featured = getFeaturedWork(4);
+  const featured = getFeaturedWork(6);
   const articles = getArticles()
     .slice(0, 3)
     .map((a) => ({ ...a, minutes: readingTime(a.body) }));
