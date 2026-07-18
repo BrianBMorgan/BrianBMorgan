@@ -18,7 +18,7 @@ export default function HomePage() {
       {/* Hero */}
       <section
         className="container"
-        style={{ padding: 'clamp(48px, 9vw, 96px) clamp(20px, 4vw, 32px) 72px' }}
+        style={{ paddingTop: 'clamp(48px, 9vw, 96px)', paddingBottom: 72 }}
       >
         <div className="hero-grid">
           <div>
