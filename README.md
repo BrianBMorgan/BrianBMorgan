@@ -1,6 +1,6 @@
 # Brian B. Morgan — Portfolio
 
-Professional portfolio for Brian B. Morgan: About, Work (Development · Events · Design), Thought Leadership, and Contact. Content-heavy by design, with no database — everything is files in the repo.
+Professional portfolio for Brian B. Morgan: About, Work (Development · Events · Design & Content), Thought Leadership, and Contact. Content-heavy by design, with no database — everything is files in the repo.
 
 ## Stack
 
@@ -69,6 +69,5 @@ public/               Static assets (images, videos)
 
 ## Notes
 
-- Current imagery is placeholder SVG art and the sample copy is fictional scaffold content — swap both as real projects land.
 - The contact form composes a `mailto:` draft (no backend). Swap `components/ContactForm.jsx` to a form service or route handler when one exists.
 - Fonts load from Google Fonts via the design system's `tokens/fonts.css`; self-hosting via `next/font` is a sensible later optimization.
