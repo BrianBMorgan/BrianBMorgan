@@ -1,17 +1,19 @@
 # Working State
 
 ## Just shipped
-- Retired all 6 fictional work items and their placeholder SVG covers. Work now carries the 2/2/2 pattern: Development (Forge Intelligence, SYSOI) and Events (Intel Pro Day, Intel House at Computex) are real; Design shows its empty state until its 2 real projects land.
-- Fixed the GitHub Pages deploy: robots/sitemap routes now declare force-static (the export-mode build was failing on them), and plain <img>/<video> srcs are base-path aware via lib/asset.js + the workflow passing NEXT_PUBLIC_BASE_PATH.
-- Type change: Spectral (serif) replaced by Work Sans everywhere — font tokens, Google Fonts import, design docs/guidelines/manifest, and the placeholder SVG covers. `--font-serif` keeps its name as a legacy alias.
-- Next.js 15 site scaffold: About, Work (Development / Events / Design), Thought Leadership, Contact. File-based MDX content in `content/` — no database. All 22 routes statically generated; build verified green and pages screenshot-checked against the design system.
-- `design/` — Brian B. Morgan design system (tokens, components, guidelines, UI kit). Consumed by the site via `design/styles.css` + `components/ds.js`.
+- Docs refresh: WORKING-STATE.md, README.md, and CLAUDE.md brought back in line with the repo (real content everywhere, Design & Content rename, removed references to a docs/ directory that doesn't exist).
+- All site content is now real — zero fictional items or placeholder SVG covers remain. Work carries 2/2/1: Development (Forge Intelligence, SYSOI) and Events (Intel Pro Day, Intel House at Computex) are complete; Design & Content has Pitch Box (with embedded explainer video) and one more project to land. Thought Leadership has two real essays: "The Last Five Percent" and the SYSOI B2B event pipeline benchmarks.
+- "Design" category renamed to "Design & Content"; nav and footer work links now derive from WORK_CATEGORIES.
+- Mobile home-hero fixes (`.container` owns the hero's horizontal padding).
+- Automerge workflow fix: the invalid thread-event trigger replaced with workflow_dispatch + a 15-minute cron sweep.
+- GitHub Pages deploy is live and green: robots/sitemap declare force-static, plain `<img>`/`<video>` srcs are base-path aware via `lib/asset.js` + `NEXT_PUBLIC_BASE_PATH`. Build statically generates 20/20 pages.
 
 ## In flight
 - Nothing.
 
 ## Next
-- Replace sample content in `content/` and placeholder facts in `lib/site.js` (email, domain, socials, availability, stats) with real ones.
-- Real imagery/video to replace the placeholder SVG covers; drop files in `public/`.
+- Second Design & Content project, completing the 2/2/2 pattern.
+- Replace the placeholder facts in `lib/site.js` with real ones — email, url, socials, availability, stats. The header comment in that file marks what's still sample content.
 - Wire the contact form to a real backend (currently composes a mailto: draft).
-- Later: self-host fonts with `next/font`; deploy target (Vercel per .gitignore) + custom domain.
+- Later: self-host fonts with `next/font`; settle the long-term deploy target (GitHub Pages today; Vercel + custom domain an option) and make `site.url` match whichever wins.
+- Housekeeping candidates: prune ~32MB of unreferenced HiRes JPGs in `public/images/work/` (the web-sized derivatives are the ones the site uses); add a PR-time build check so automerge can't land a red build; delete the merged remote branches (`BrianBMorgan-patch-1`, `claude/brianbmorgan-design-folder-m8kg7w`).

@@ -1,4 +1,4 @@
-Guidance for working in this repo. Read alongside README.md. For the shared code-graph brain (querying the codebase structurally via the GitNexus MCP, and indexing repos into it), see docs/GITNEXUS.md. For an index of everything in docs/, see docs/README.md.
+Guidance for working in this repo. Read alongside README.md.
 
 Role and Persona
 
@@ -6,7 +6,7 @@ You are an expert, highly autonomous software engineering assistant operating in
 
 Core Rules
 
-Be Concise: Provide focused responses. Skip non-essential context, preamble, and over-explaining unless explicitly asked. Write First: Write the implementation directly. Do not waste tokens asking for permission to make obvious changes. Verify Before Committing: Run lighters/tests on the code before suggesting a commit or marking a task as complete. Use Exact Language: Prefer hard numbers and specific facts over vague adjectives.
+Be Concise: Provide focused responses. Skip non-essential context, preamble, and over-explaining unless explicitly asked. Write First: Write the implementation directly. Do not waste tokens asking for permission to make obvious changes. Verify Before Committing: Run linters/tests on the code before suggesting a commit or marking a task as complete. In this repo the check is `npm run build` — there is no separate lint or test script. Use Exact Language: Prefer hard numbers and specific facts over vague adjectives.
 
 Coding Standards
 
