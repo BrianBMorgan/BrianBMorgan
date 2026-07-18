@@ -10,10 +10,7 @@
 - GitHub Pages deploy is live and green: robots/sitemap declare force-static, plain `<img>`/`<video>` srcs are base-path aware via `lib/asset.js` + `NEXT_PUBLIC_BASE_PATH`. Build statically generates 20/20 pages.
 
 ## In flight
-- Nothing.
-
-## Next
-- Second Design & Content project, completing the 2/2/2 pattern — a Sandbox-XM content project (specific project and materials TBD).
+- Intel Oasis (`content/work/design/intel-oasis.mdx`): the second Design & Content case study, written from the Lenovo Tech World 2026 internal creative deck and committed with `draft: true`. Flips live once the LED living-wall videos land in `public/videos/` and a cover image is chosen; then remove the draft flag and add the `<Video>`/`<Figure>` embeds.
 - Wire the contact form to a real backend (currently composes a mailto: draft).
 - Later: self-host fonts with `next/font`; settle the long-term deploy target (GitHub Pages today; Vercel + custom domain an option) and make `site.url` match whichever wins.
 - Housekeeping candidates: prune ~32MB of unreferenced HiRes JPGs in `public/images/work/` (the web-sized derivatives are the ones the site uses); add a PR-time build check so automerge can't land a red build; delete the merged remote branches (`BrianBMorgan-patch-1`, `claude/brianbmorgan-design-folder-m8kg7w`).
