@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Eyebrow, IconButton } from '@/components/ds';
 import { Mail } from '@/components/icons';
 import { GitHubMark, LinkedInMark } from '@/components/brand-icons';
+import { WORK_CATEGORIES } from '@/lib/categories';
 import { site } from '@/lib/site';
 
 const colLink = {
@@ -76,11 +77,7 @@ export function SiteFooter() {
             />
             <FooterCol
               title="Work"
-              links={[
-                ['/work/development', 'Development'],
-                ['/work/events', 'Events'],
-                ['/work/design', 'Design'],
-              ]}
+              links={WORK_CATEGORIES.map((c) => [`/work/${c.slug}`, c.label])}
             />
             <div>
               <Eyebrow color="var(--gold-400)">Elsewhere</Eyebrow>

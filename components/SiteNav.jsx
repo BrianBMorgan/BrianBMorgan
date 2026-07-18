@@ -4,13 +4,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ds';
 import { ArrowRight, ChevronDown, Menu, X } from '@/components/icons';
+import { WORK_CATEGORIES } from '@/lib/categories';
 import { site } from '@/lib/site';
 
 const WORK_LINKS = [
   ['/work', 'All work'],
-  ['/work/development', 'Development'],
-  ['/work/events', 'Events'],
-  ['/work/design', 'Design'],
+  ...WORK_CATEGORIES.map((c) => [`/work/${c.slug}`, c.label]),
 ];
 
 const linkStyle = (active) => ({
