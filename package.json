@@ -1,1 +1,18 @@
-
+{
+  "name": "brianbmorgan-portfolio",
+  "private": true,
+  "description": "Brian B. Morgan — professional portfolio. Next.js + file-based MDX content, no database.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^1.25.0",
+    "next": "^15.5.20",
+    "next-mdx-remote": "^5.0.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  }
+}
