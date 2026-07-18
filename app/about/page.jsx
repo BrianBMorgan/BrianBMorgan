@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Eyebrow, Stat, Tag } from '@/components/ds';
 import { LinkButton } from '@/components/LinkButton';
@@ -5,6 +7,7 @@ import { ArrowRight } from '@/components/icons';
 import { Section } from '@/components/Section';
 import { mdxComponents } from '@/components/mdx-components';
 import { getPage } from '@/lib/content';
+import { asset } from '@/lib/asset';
 import { site } from '@/lib/site';
 
 export const metadata = {
@@ -12,8 +15,21 @@ export const metadata = {
   description: `Who ${site.name} is and how the work gets done.`,
 };
 
+// The headshot slots into the gradient card when a portrait file exists in
+// public/images/ (checked at build time); until then the card stays as the
+// plain gradient. Drop in portrait.jpg (or .png/.webp) to activate it.
+function findPortrait() {
+  for (const name of ['portrait.jpg', 'portrait.jpeg', 'portrait.png', 'portrait.webp']) {
+    if (fs.existsSync(path.join(process.cwd(), 'public', 'images', name))) {
+      return `/images/${name}`;
+    }
+  }
+  return null;
+}
+
 export default function AboutPage() {
   const page = getPage('about');
+  const portrait = findPortrait();
 
   return (
     <>
@@ -27,11 +43,28 @@ export default function AboutPage() {
                 borderRadius: 14,
                 background: 'linear-gradient(160deg, var(--gold-500), var(--rust-700))',
                 display: 'flex',
-                alignItems: 'flex-end',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                gap: 16,
                 padding: 20,
                 boxShadow: 'var(--shadow-xl)',
               }}
             >
+              {portrait && (
+                <img
+                  src={asset(portrait)}
+                  alt={`Portrait of ${site.name}`}
+                  style={{
+                    width: '100%',
+                    flex: 1,
+                    minHeight: 0,
+                    objectFit: 'cover',
+                    borderRadius: 8,
+                    display: 'block',
+                    boxShadow: 'var(--shadow-md)',
+                  }}
+                />
+              )}
               <span
                 style={{
                   fontFamily: 'var(--font-display)',
