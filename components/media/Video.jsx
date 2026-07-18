@@ -1,3 +1,5 @@
+import { asset } from '@/lib/asset';
+
 /**
  * Video for MDX bodies and case studies.
  * - Local file: <Video src="/videos/demo.mp4" poster="/images/demo-poster.jpg" />
@@ -26,8 +28,8 @@ export function Video({ src, embed, poster, caption, title = 'Embedded video', s
         </div>
       ) : (
         <video
-          src={src}
-          poster={poster}
+          src={asset(src)}
+          poster={asset(poster)}
           controls
           playsInline
           style={{

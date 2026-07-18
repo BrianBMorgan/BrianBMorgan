@@ -1,6 +1,9 @@
 import { WORK_CATEGORIES, getArticles, getWorkItems } from '@/lib/content';
 import { site } from '@/lib/site';
 
+// Required for `output: 'export'` (the GitHub Pages workflow builds in export mode).
+export const dynamic = 'force-static';
+
 export default function sitemap() {
   const staticRoutes = ['', '/about', '/work', '/thought-leadership', '/contact'].map((p) => ({
     url: `${site.url}${p}`,
