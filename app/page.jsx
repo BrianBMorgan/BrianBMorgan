@@ -75,10 +75,15 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 6px' }}>
-              <Stat value="12" label="Years" />
-              <Stat value="40+" label="Projects" accent="var(--gold-600)" />
-              <Stat value="6" label="Awards" accent="var(--rust-600)" />
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, padding: '4px 6px' }}>
+              {site.stats.map((s, i) => (
+                <Stat
+                  key={s.label}
+                  value={s.value}
+                  label={s.label}
+                  accent={[undefined, 'var(--gold-600)', 'var(--rust-600)'][i % 3]}
+                />
+              ))}
             </div>
           </div>
         </div>
