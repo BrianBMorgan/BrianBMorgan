@@ -79,7 +79,7 @@ export function SiteFooter() {
               links={[
                 ['/work/development', 'Development'],
                 ['/work/events', 'Events'],
-                ['/work/design', 'Design'],
+                ['/work/design', 'Design & Content'],
               ]}
             />
             <div>

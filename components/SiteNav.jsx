@@ -10,7 +10,7 @@ const WORK_LINKS = [
   ['/work', 'All work'],
   ['/work/development', 'Development'],
   ['/work/events', 'Events'],
-  ['/work/design', 'Design'],
+  ['/work/design', 'Design & Content'],
 ];
 
 const linkStyle = (active) => ({
