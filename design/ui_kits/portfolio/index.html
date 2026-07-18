@@ -1,0 +1,45 @@
+<!-- @dsCard group="Portfolio" viewport="1200x760" name="Portfolio — Full Page" subtitle="Interactive click-through: nav, hero, work, detail, about, contact" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brian B. Morgan — Portfolio</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html{scroll-behavior:smooth}body{margin:0;background:var(--surface-page)}</style></head>
+<body><div id="root"></div>
+<script type="text/babel" src="./Nav.jsx"></script>
+<script type="text/babel" src="./Hero.jsx"></script>
+<script type="text/babel" src="./Work.jsx"></script>
+<script type="text/babel" src="./About.jsx"></script>
+<script type="text/babel" src="./Contact.jsx"></script>
+<script type="text/babel" src="./Footer.jsx"></script>
+<script type="text/babel">
+function App(){
+  const [current,setCurrent]=React.useState('work');
+  const [project,setProject]=React.useState(null);
+  const nav=(id)=>{setProject(null);setCurrent(id);const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});};
+  const open=(p)=>{setProject(p);window.scrollTo({top:0,behavior:'smooth'});};
+  React.useEffect(()=>{const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),80);return()=>clearTimeout(t);});
+  return <React.Fragment>
+    <window.Nav current={current} onNav={nav}/>
+    {project ? <window.ProjectDetail p={project} onBack={()=>setProject(null)}/> :
+      <React.Fragment>
+        <window.Hero onNav={nav}/>
+        <window.Work onOpen={open}/>
+        <window.About/>
+        <window.Contact/>
+      </React.Fragment>}
+    <window.Footer onNav={nav}/>
+  </React.Fragment>;
+}
+// wait for babel-src files to define globals
+function mount(){
+  if(window.Nav&&window.Hero&&window.Work&&window.About&&window.Contact&&window.Footer){
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    setTimeout(()=>window.lucide&&window.lucide.createIcons(),120);
+  } else { setTimeout(mount,40); }
+}
+mount();
+</script></body></html>

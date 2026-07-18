@@ -1,0 +1,107 @@
+/* ==========================================================================
+   COLORS — Brian B Morgan
+   A warm, masculine, sophisticated palette. Parchment grounds everything;
+   charcoal carries the text; gold leads; sage, rust and deep blue support.
+   ========================================================================== */
+:root {
+  /* --- Parchment (warm neutral surfaces, light → subtle) --- */
+  --parchment-50:  #FBF7EE;
+  --parchment-100: #F6EFDF;
+  --parchment-200: #EFE4CC;
+  --parchment-300: #E4D5B4;
+  --parchment-400: #D3BF95;
+
+  /* --- Charcoal (warm near-black ink & deep surfaces) --- */
+  --charcoal-900: #201D19;
+  --charcoal-800: #2B2721;
+  --charcoal-700: #3A352D;
+  --charcoal-600: #4E473C;
+  --charcoal-500: #6B6353;
+  --charcoal-400: #8C8474;
+  --charcoal-300: #B0A895;
+
+  /* --- Gold (primary accent — brass, not yellow) --- */
+  --gold-700: #8A6A1E;
+  --gold-600: #A9832C;
+  --gold-500: #C09A3A;
+  --gold-400: #D2B25E;
+  --gold-200: #E8D6A0;
+
+  /* --- Sage (secondary accent — muted olive-green) --- */
+  --sage-700: #566146;
+  --sage-600: #6C7A57;
+  --sage-500: #849071;
+  --sage-300: #B3BBA1;
+  --sage-100: #E1E5D6;
+
+  /* --- Rust (warm alert / energy) --- */
+  --rust-700: #8A3C22;
+  --rust-600: #A6482A;
+  --rust-500: #BE5A38;
+  --rust-300: #DFA488;
+  --rust-100: #F1D9CC;
+
+  /* --- Deep Blue (cool anchor — links, focus, trust) --- */
+  --blue-800: #1F3547;
+  --blue-700: #274156;
+  --blue-600: #345A76;
+  --blue-500: #4A759B;
+  --blue-300: #93B2C8;
+  --blue-100: #D6E3EC;
+
+  /* --- Pure ends --- */
+  --white: #FFFFFF;
+  --black: #14110D;
+
+  /* ======================================================================
+     SEMANTIC ALIASES — reference these in components, not the raw scales.
+     ====================================================================== */
+  /* Surfaces */
+  --surface-page:      var(--parchment-100);
+  --surface-raised:    var(--parchment-50);
+  --surface-card:      var(--white);
+  --surface-sunken:    var(--parchment-200);
+  --surface-inverse:   var(--charcoal-900);
+  --surface-inverse-2: var(--charcoal-800);
+
+  /* Text */
+  --text-strong:   var(--charcoal-900);
+  --text-body:     var(--charcoal-700);
+  --text-muted:    var(--charcoal-500);
+  --text-subtle:   var(--charcoal-400);
+  --text-on-dark:  var(--parchment-100);
+  --text-on-dark-muted: var(--charcoal-300);
+  --text-on-gold:  var(--charcoal-900);
+  --text-inverse:  var(--parchment-50);
+
+  /* Brand / accents */
+  --accent-primary:   var(--gold-600);
+  --accent-primary-hover: var(--gold-700);
+  --accent-secondary: var(--sage-600);
+  --accent-tertiary:  var(--blue-700);
+  --accent-warm:      var(--rust-600);
+
+  /* Links */
+  --link:        var(--blue-700);
+  --link-hover:  var(--blue-800);
+  --link-visited: var(--blue-600);
+
+  /* Lines & borders */
+  --border-subtle:  #E3D8C1;
+  --border-default: #D8CAAD;
+  --border-strong:  var(--charcoal-300);
+  --border-inverse: var(--charcoal-600);
+
+  /* Focus ring */
+  --focus-ring: var(--blue-500);
+
+  /* Semantic status */
+  --success:  var(--sage-700);
+  --success-surface: var(--sage-100);
+  --warning:  var(--gold-700);
+  --warning-surface: var(--gold-200);
+  --danger:   var(--rust-600);
+  --danger-surface: var(--rust-100);
+  --info:     var(--blue-600);
+  --info-surface: var(--blue-100);
+}
