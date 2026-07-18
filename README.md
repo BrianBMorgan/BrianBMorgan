@@ -69,6 +69,5 @@ public/               Static assets (images, videos)
 
 ## Notes
 
-- All work items, essays, and imagery are real. The remaining sample content is the contact facts in `lib/site.js` (email, url, socials, availability, stats) — its header comment marks what still needs real values.
 - The contact form composes a `mailto:` draft (no backend). Swap `components/ContactForm.jsx` to a form service or route handler when one exists.
 - Fonts load from Google Fonts via the design system's `tokens/fonts.css`; self-hosting via `next/font` is a sensible later optimization.
