@@ -16,7 +16,10 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="container" style={{ padding: '96px 32px 72px' }}>
+      <section
+        className="container"
+        style={{ paddingTop: 'clamp(48px, 9vw, 96px)', paddingBottom: 72 }}
+      >
         <div className="hero-grid">
           <div>
             <Eyebrow rule>Portfolio · {new Date().getFullYear()}</Eyebrow>
@@ -56,13 +59,9 @@ export default function HomePage() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <div
+              className="hero-card"
               style={{
-                aspectRatio: '4/5',
-                borderRadius: 14,
                 background: 'linear-gradient(160deg, var(--sage-500), var(--sage-700))',
-                display: 'flex',
-                alignItems: 'flex-end',
-                padding: 22,
                 boxShadow: 'var(--shadow-lg)',
               }}
             >
@@ -75,7 +74,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, padding: '4px 6px' }}>
+            <div className="hero-stats">
               {site.stats.map((s, i) => (
                 <Stat
                   key={s.label}

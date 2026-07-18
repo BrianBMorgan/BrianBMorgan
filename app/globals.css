@@ -32,6 +32,23 @@ html {
   align-items: center;
 }
 
+/* Hero right column: a 4/5 portrait card on desktop, a compact banner on
+   mobile so it stops swallowing the first screenful. */
+.hero-card {
+  aspect-ratio: 4/5;
+  display: flex;
+  align-items: flex-end;
+  padding: 22px;
+  border-radius: 14px;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 6px;
+}
+
 .split-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -64,6 +81,14 @@ html {
   .about-grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+  .hero-card {
+    aspect-ratio: auto;
+    min-height: 150px;
+  }
+  .hero-stats {
+    flex-wrap: wrap;
+    row-gap: 20px;
   }
 }
 
