@@ -1,33 +1,123 @@
-name: Global Auto-Merge Enabler
+name: Gated Auto-Merge
+
+# Auto-merge that waits for code review to finish.
+#
+# The previous version armed auto-merge the moment a PR opened, so merges
+# raced the review bot: CodeQL would pass and the PR would merge while review
+# comments (and the fixes for them) were still in flight.
+#
+# This version:
+#   1. Still auto-publishes draft PRs when they open.
+#   2. Arms auto-merge only when a review has been submitted AND every review
+#      thread is resolved. Addressing a comment isn't enough; the thread must
+#      be marked resolved on GitHub.
+#   3. Disarms auto-merge whenever a thread goes back to unresolved.
+#   4. Sweeps every 15 minutes and arms PRs older than 10 minutes that have
+#      no review at all, so merging degrades gracefully if the review bot
+#      stops posting entirely.
+#
+# Merge-commit method: squash + rebase are disabled repo-wide so that a
+# development → main promotion keeps `development` as an ancestor of `main`
+# and the next promotion is conflict-free (see CLAUDE.md "Git / PR workflow").
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, ready_for_review]
+  pull_request_review:
+    types: [submitted]
+  pull_request_review_thread:
+    types: [resolved, unresolved]
+  schedule:
+    - cron: '*/15 * * * *'
+
+permissions:
+  pull-requests: write
+  contents: write
 
 jobs:
-  enable-automerge:
+  publish-drafts:
+    if: github.event_name == 'pull_request' && github.event.action != 'ready_for_review' && github.event.pull_request.draft == true
     runs-on: ubuntu-latest
-    
-    permissions:
-      pull-requests: write
-      contents: write
-
     steps:
       - name: Auto-publish Claude Drafts
-        if: github.event.pull_request.draft == true
         run: gh pr ready "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Merge-commit method: squash + rebase are disabled repo-wide so that a
-      # development → main promotion keeps `development` as an ancestor of `main`
-      # and the next promotion is conflict-free (see CLAUDE.md "Git / PR workflow").
-      # Scoped to development-targeted PRs so development → main promotions to
-      # production stay a manual, founder-gated merge rather than auto-merging.
-      - name: Enable GitHub Auto-Merge
-        if: github.event.pull_request.base.ref == 'main'
-        run: gh pr merge --auto --merge "$PR_URL"
+  gate:
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Arm or disarm auto-merge based on review state
         env:
-          PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            prs=$(gh pr list --repo "$REPO" --base main --state open --json number --jq '.[].number')
+          else
+            prs="$EVENT_PR"
+          fi
+          [ -n "$prs" ] || { echo "No open PRs to evaluate."; exit 0; }
+
+          owner="${REPO%%/*}"
+          name="${REPO##*/}"
+
+          for pr in $prs; do
+            data=$(gh api graphql \
+              -f query='query($owner: String!, $name: String!, $pr: Int!) {
+                repository(owner: $owner, name: $name) {
+                  pullRequest(number: $pr) {
+                    isDraft
+                    baseRefName
+                    createdAt
+                    url
+                    autoMergeRequest { enabledAt }
+                    reviews(first: 1) { totalCount }
+                    reviewThreads(first: 100) { nodes { isResolved } }
+                  }
+                }
+              }' -f owner="$owner" -f name="$name" -F pr="$pr")
+
+            isDraft=$(jq -r '.data.repository.pullRequest.isDraft' <<<"$data")
+            base=$(jq -r '.data.repository.pullRequest.baseRefName' <<<"$data")
+            url=$(jq -r '.data.repository.pullRequest.url' <<<"$data")
+            armed=$(jq -r '.data.repository.pullRequest.autoMergeRequest != null' <<<"$data")
+            reviews=$(jq -r '.data.repository.pullRequest.reviews.totalCount' <<<"$data")
+            unresolved=$(jq -r '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved | not)] | length' <<<"$data")
+            ageSeconds=$(( $(date +%s) - $(date -d "$(jq -r '.data.repository.pullRequest.createdAt' <<<"$data")" +%s) ))
+
+            if [ "$isDraft" = "true" ] || [ "$base" != "main" ]; then
+              echo "PR #$pr: skipped (draft=$isDraft base=$base)."
+              continue
+            fi
+
+            if [ "$unresolved" -gt 0 ]; then
+              if [ "$armed" = "true" ]; then
+                gh pr merge --disable-auto "$url" || true
+                echo "PR #$pr: disarmed, $unresolved unresolved review thread(s)."
+              else
+                echo "PR #$pr: holding, $unresolved unresolved review thread(s)."
+              fi
+              continue
+            fi
+
+            # No unresolved threads. Arm once a review exists; on the scheduled
+            # sweep, also arm review-less PRs older than 10 minutes so a silent
+            # review bot can't block merging forever.
+            if [ "$reviews" -gt 0 ] || { [ "$EVENT_NAME" = "schedule" ] && [ "$ageSeconds" -gt 600 ]; }; then
+              if [ "$armed" = "true" ]; then
+                echo "PR #$pr: already armed."
+              else
+                gh pr merge --auto --merge "$url"
+                echo "PR #$pr: armed (reviews=$reviews, unresolved=0)."
+              fi
+            else
+              echo "PR #$pr: waiting for a review before arming."
+            fi
+          done
