@@ -28,7 +28,7 @@ export default function ThoughtLeadershipPage() {
           </div>
         ) : (
           <p style={{ color: 'var(--text-muted)' }}>
-            Nothing published yet — drop a file into <code>content/thought-leadership/</code> to
+            Nothing published yet. Drop a file into <code>content/thought-leadership/</code> to
             add the first essay.
           </p>
         )}

@@ -22,7 +22,7 @@ export default function WorkIndexPage() {
         <PageHeader
           eyebrow="Selected work"
           title="Things I&rsquo;ve built, staged, and drawn"
-          lede="The practice runs across three lanes — products shipped to production, rooms and gatherings produced end to end, and the identities and systems that hold it all together."
+          lede="The practice runs across three lanes: products shipped to production, rooms and gatherings produced end to end, and the identities and systems that hold it all together."
         />
       </div>
 

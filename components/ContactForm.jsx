@@ -53,7 +53,7 @@ export function ContactForm() {
           </div>
           <h3 style={{ fontSize: 26, margin: '0 0 8px' }}>Over to your email app</h3>
           <p style={{ color: 'var(--text-muted)', margin: '0 0 20px' }}>
-            Thanks, {name.split(' ')[0] || 'friend'} — a drafted message just opened. If it
+            Thanks, {name.split(' ')[0] || 'friend'}. A drafted message just opened. If it
             didn&apos;t, write me directly at {site.email}.
           </p>
           <Button
