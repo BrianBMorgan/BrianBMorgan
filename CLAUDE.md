@@ -1,0 +1,1 @@
+Guidance for working in this repo. Read alongside README.md. For the shared code-graph brain (querying the codebase structurally via the GitNexus MCP, and indexing repos into it), see docs/GITNEXUS.md. For an index of everything in docs/, see docs/README.md.
