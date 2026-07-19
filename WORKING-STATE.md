@@ -1,6 +1,7 @@
 # Working State
 
 ## Just shipped
+- brianbmorgan.com is live. The custom domain is configured in the repo's Pages settings (Actions-mode deploys ignore a CNAME file in the artifact — that's why the `public/CNAME` attempt didn't work; the file is removed). DNS was already pointing at GitHub; the HTTPS cert covers apex + www and enforcement is on. `site.url` now uses the domain, the `/BrianBMorgan` base path drops automatically via configure-pages, and the old github.io URLs redirect.
 - Contact form sends real email via Resend, verified end to end. The form POSTs to `/public/portfolio-contact` on the ForgeOS mailforge service (ForgeOS commit 4deac866); the relay sends from portfolio@sandbox-xm.com to brian@sandbox-xm.com with the visitor as reply-to, abuse-limited per submitted email + global caps, CORS pinned to the portfolio origins. A test submission returned {ok:true} and shows `delivered` in Resend. The form keeps a click-through mailto fallback if the relay is ever down.
 - Intel Oasis case study is live (`content/work/design/intel-oasis.mdx`): the co-branded Intel × Lenovo identity for Tech World 2026, with both LED tile loops in `public/videos/` and a cover cut from the wall feed. Design & Content now has its 2 projects — the 2/2/2 pattern is complete.
 - `lib/site.js` facts are now real: contact email brian@sandbox-xm.com; canonical url is the GitHub Pages address https://brianbmorgan.github.io/BrianBMorgan (drives sitemap/robots/metadata — swap when a custom domain lands). Stats, availability, LinkedIn, and location confirmed accurate as-is.
@@ -14,5 +15,5 @@
 ## In flight
 - Nothing.
 - Wire the contact form to a real backend (currently composes a mailto: draft).
-- Later: self-host fonts with `next/font`; settle the long-term deploy target (GitHub Pages today; Vercel + custom domain an option) and make `site.url` match whichever wins.
+- Later: self-host fonts with `next/font`.
 - Housekeeping candidates: prune ~32MB of unreferenced HiRes JPGs in `public/images/work/` (the web-sized derivatives are the ones the site uses); add a PR-time build check so automerge can't land a red build; delete the merged remote branches (`BrianBMorgan-patch-1`, `claude/brianbmorgan-design-folder-m8kg7w`).
