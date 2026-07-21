@@ -1,8 +1,9 @@
 import { Badge, Eyebrow } from '@/components/ds';
 import { Clock, Mail, MapPin } from '@/components/icons';
 import { ContactForm } from '@/components/ContactForm';
+import { JsonLd } from '@/components/JsonLd';
 import { site } from '@/lib/site';
-import { branded, socialMeta } from '@/lib/seo';
+import { branded, breadcrumbLd, faqLd, socialMeta } from '@/lib/seo';
 
 const description = `Start a project with ${site.name}. Available for select projects, replies within 48 hours.`;
 export const metadata = {
@@ -17,9 +18,44 @@ const rows = [
   [Clock, 'Replies within 48 hours'],
 ];
 
+// Grounded in the About page, the work taxonomy, and the real engagements.
+// The answers below are rendered visibly AND emitted as FAQPage schema.
+const faqs = [
+  {
+    q: 'What kind of work do you take on?',
+    a: 'Three lanes: products and platforms built and shipped to production, events produced end to end, and brand and design systems with the content voice that carries them. Most engagements pull from more than one.',
+  },
+  {
+    q: 'Are you taking on new projects?',
+    a: `A handful each quarter, so the work gets full attention. Current status: ${site.availability}. Send a note and I'll tell you honestly where things stand.`,
+  },
+  {
+    q: 'How soon will I hear back?',
+    a: "Within 48 hours. If the fit is there, we'll set up a call to talk through scope and timing.",
+  },
+  {
+    q: 'Where are you based, and do you work remotely?',
+    a: 'The studio is in Portland, Oregon. I work embedded with small teams wherever the work is; recent events have run in New York, Las Vegas, and Taipei.',
+  },
+  {
+    q: 'How do you work?',
+    a: 'Small teams and direct lines, strategy before execution, and documentation as part of the deliverable. The details nobody budgets for, the last five percent, are the ones people remember.',
+  },
+];
+
 export default function ContactPage() {
   return (
-    <section className="container" style={{ padding: '80px 32px 40px' }}>
+    <>
+      <JsonLd
+        data={[
+          faqLd(faqs),
+          breadcrumbLd([
+            { name: 'Home', path: '/' },
+            { name: 'Contact', path: '/contact' },
+          ]),
+        ]}
+      />
+      <section className="container" style={{ padding: '80px 32px 40px' }}>
       <div className="split-grid" style={{ alignItems: 'center' }}>
         <div>
           <Eyebrow rule>Contact</Eyebrow>
@@ -60,6 +96,40 @@ export default function ContactPage() {
         </div>
         <ContactForm />
       </div>
-    </section>
+      </section>
+
+      {/* FAQ — visible Q&A that mirrors the FAQPage structured data */}
+      <section className="container" style={{ padding: '8px 32px 88px' }}>
+        <div style={{ maxWidth: 760 }}>
+          <Eyebrow rule>Questions</Eyebrow>
+          <dl style={{ margin: 'var(--space-6) 0 0' }}>
+            {faqs.map((item, i) => (
+              <div
+                key={item.q}
+                style={{
+                  padding: 'var(--space-5) 0',
+                  borderTop: i === 0 ? 'none' : '1px solid var(--border-subtle)',
+                }}
+              >
+                <dt
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 19,
+                    fontWeight: 600,
+                    color: 'var(--charcoal-900)',
+                    margin: '0 0 8px',
+                  }}
+                >
+                  {item.q}
+                </dt>
+                <dd style={{ margin: 0, fontSize: 16, lineHeight: 1.65, color: 'var(--text-body)' }}>
+                  {item.a}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+    </>
   );
 }
