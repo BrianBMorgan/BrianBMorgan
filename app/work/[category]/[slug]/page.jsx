@@ -7,6 +7,8 @@ import { Video } from '@/components/media/Video';
 import { mdxComponents } from '@/components/mdx-components';
 import { WORK_CATEGORIES, getWorkCategory, getWorkItem, getWorkItems } from '@/lib/content';
 import { asset } from '@/lib/asset';
+import { JsonLd } from '@/components/JsonLd';
+import { branded, breadcrumbLd, safeIsoString, socialMeta, workLd } from '@/lib/seo';
 
 export function generateStaticParams() {
   return WORK_CATEGORIES.flatMap((c) =>
@@ -18,7 +20,18 @@ export async function generateMetadata({ params }) {
   const { category, slug } = await params;
   const item = getWorkItem(category, slug);
   if (!item) return {};
-  return { title: item.title, description: item.summary };
+  return {
+    title: item.title,
+    description: item.summary,
+    ...socialMeta({
+      title: branded(item.title),
+      description: item.summary,
+      path: `/work/${category}/${slug}`,
+      type: 'article',
+      image: item.cover,
+      publishedTime: safeIsoString(item.date),
+    }),
+  };
 }
 
 function MetaBlock({ label, children }) {
@@ -49,6 +62,17 @@ export default async function WorkItemPage({ params }) {
 
   return (
     <article className="container" style={{ maxWidth: 960, paddingTop: 'var(--space-7)' }}>
+      <JsonLd
+        data={[
+          workLd({ ...item, category: cat.slug }),
+          breadcrumbLd([
+            { name: 'Home', path: '/' },
+            { name: 'Work', path: '/work' },
+            { name: cat.label, path: `/work/${cat.slug}` },
+            { name: item.title, path: `/work/${cat.slug}/${item.slug}` },
+          ]),
+        ]}
+      />
       <LinkButton
         href={`/work/${cat.slug}`}
         variant="ghost"

@@ -2,10 +2,13 @@ import { Badge, Eyebrow } from '@/components/ds';
 import { Clock, Mail, MapPin } from '@/components/icons';
 import { ContactForm } from '@/components/ContactForm';
 import { site } from '@/lib/site';
+import { branded, socialMeta } from '@/lib/seo';
 
+const description = `Start a project with ${site.name}. Available for select projects, replies within 48 hours.`;
 export const metadata = {
   title: 'Contact',
-  description: `Start a project with ${site.name}.`,
+  description,
+  ...socialMeta({ title: branded('Contact'), description, path: '/contact' }),
 };
 
 const rows = [

@@ -1,10 +1,13 @@
 import { PageHeader, Section } from '@/components/Section';
 import { ArticleCard } from '@/components/ArticleCard';
 import { getArticles, readingTime } from '@/lib/content';
+import { branded, socialMeta } from '@/lib/seo';
 
+const description = 'Essays on craft, systems, and building things that endure.';
 export const metadata = {
   title: 'Thought leadership',
-  description: 'Essays on craft, systems, and building things that endure.',
+  description,
+  ...socialMeta({ title: branded('Thought leadership'), description, path: '/thought-leadership' }),
 };
 
 export default function ThoughtLeadershipPage() {

@@ -9,11 +9,28 @@ import { mdxComponents } from '@/components/mdx-components';
 import { getPage } from '@/lib/content';
 import { asset } from '@/lib/asset';
 import { site } from '@/lib/site';
+import { JsonLd } from '@/components/JsonLd';
+import { PERSON_ID, abs, branded, breadcrumbLd, socialMeta } from '@/lib/seo';
 
+const description = `Who ${site.name} is and how the work gets done.`;
 export const metadata = {
   title: 'About',
-  description: `Who ${site.name} is and how the work gets done.`,
+  description,
+  ...socialMeta({ title: branded('About'), description, path: '/about' }),
 };
+
+const aboutLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    url: abs('/about'),
+    mainEntity: { '@id': PERSON_ID },
+  },
+  breadcrumbLd([
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+  ]),
+];
 
 // The headshot slots into the gradient card when a portrait file exists in
 // public/images/ (checked at build time); until then the card stays as the
@@ -33,6 +50,7 @@ export default function AboutPage() {
 
   return (
     <>
+      <JsonLd data={aboutLd} />
       {/* Dark editorial band — portrait, bio, skills, stats */}
       <section style={{ background: 'var(--charcoal-900)', color: 'var(--text-on-dark)' }}>
         <div className="container" style={{ padding: '80px 32px' }}>
