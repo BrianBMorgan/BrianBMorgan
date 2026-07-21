@@ -4,10 +4,13 @@ import { ArrowRight } from '@/components/icons';
 import { PageHeader, Section, SectionHeader } from '@/components/Section';
 import { WorkCard } from '@/components/WorkCard';
 import { WORK_CATEGORIES, getWorkItems } from '@/lib/content';
+import { branded, socialMeta } from '@/lib/seo';
 
+const description = 'Selected work across development, events, and design & content.';
 export const metadata = {
   title: 'Work',
-  description: 'Selected work across development, events, and design.',
+  description,
+  ...socialMeta({ title: branded('Work'), description, path: '/work' }),
 };
 
 export default function WorkIndexPage() {

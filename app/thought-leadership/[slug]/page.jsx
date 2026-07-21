@@ -4,8 +4,10 @@ import { Tag } from '@/components/ds';
 import { LinkButton } from '@/components/LinkButton';
 import { ArrowLeft } from '@/components/icons';
 import { mdxComponents } from '@/components/mdx-components';
+import { JsonLd } from '@/components/JsonLd';
 import { formatDate, getArticle, getArticles, readingTime } from '@/lib/content';
 import { site } from '@/lib/site';
+import { articleLd, branded, breadcrumbLd, socialMeta } from '@/lib/seo';
 
 export function generateStaticParams() {
   return getArticles().map((a) => ({ slug: a.slug }));
@@ -15,7 +17,17 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) return {};
-  return { title: article.title, description: article.summary };
+  return {
+    title: article.title,
+    description: article.summary,
+    ...socialMeta({
+      title: branded(article.title),
+      description: article.summary,
+      path: `/thought-leadership/${slug}`,
+      type: 'article',
+      publishedTime: article.date ? new Date(article.date).toISOString() : undefined,
+    }),
+  };
 }
 
 export default async function ArticlePage({ params }) {
@@ -28,6 +40,16 @@ export default async function ArticlePage({ params }) {
       className="container"
       style={{ maxWidth: 'calc(var(--container-narrow) + 64px)', paddingTop: 'var(--space-7)' }}
     >
+      <JsonLd
+        data={[
+          articleLd(article),
+          breadcrumbLd([
+            { name: 'Home', path: '/' },
+            { name: 'Thought leadership', path: '/thought-leadership' },
+            { name: article.title, path: `/thought-leadership/${article.slug}` },
+          ]),
+        ]}
+      />
       <LinkButton
         href="/thought-leadership"
         variant="ghost"

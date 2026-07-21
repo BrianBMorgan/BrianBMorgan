@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { PageHeader, Section } from '@/components/Section';
 import { WorkCard } from '@/components/WorkCard';
 import { WORK_CATEGORIES, getWorkCategory, getWorkItems } from '@/lib/content';
+import { branded, socialMeta } from '@/lib/seo';
 
 export function generateStaticParams() {
   return WORK_CATEGORIES.map((c) => ({ category: c.slug }));
@@ -11,7 +12,12 @@ export async function generateMetadata({ params }) {
   const { category } = await params;
   const cat = getWorkCategory(category);
   if (!cat) return {};
-  return { title: `${cat.label} — Work`, description: cat.description };
+  const title = `${cat.label} — Work`;
+  return {
+    title,
+    description: cat.description,
+    ...socialMeta({ title: branded(title), description: cat.description, path: `/work/${cat.slug}` }),
+  };
 }
 
 export default async function WorkCategoryPage({ params }) {

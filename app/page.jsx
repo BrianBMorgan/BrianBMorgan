@@ -6,6 +6,13 @@ import { WorkCard } from '@/components/WorkCard';
 import { ArticleCard } from '@/components/ArticleCard';
 import { getArticles, getFeaturedWork, readingTime } from '@/lib/content';
 import { site } from '@/lib/site';
+import { socialMeta } from '@/lib/seo';
+
+export const metadata = socialMeta({
+  title: `${site.name} — ${site.role}`,
+  description: site.description,
+  path: '/',
+});
 
 export default function HomePage() {
   const featured = getFeaturedWork(6);
