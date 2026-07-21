@@ -8,7 +8,7 @@ import { mdxComponents } from '@/components/mdx-components';
 import { WORK_CATEGORIES, getWorkCategory, getWorkItem, getWorkItems } from '@/lib/content';
 import { asset } from '@/lib/asset';
 import { JsonLd } from '@/components/JsonLd';
-import { branded, breadcrumbLd, socialMeta, workLd } from '@/lib/seo';
+import { branded, breadcrumbLd, safeIsoString, socialMeta, workLd } from '@/lib/seo';
 
 export function generateStaticParams() {
   return WORK_CATEGORIES.flatMap((c) =>
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
       path: `/work/${category}/${slug}`,
       type: 'article',
       image: item.cover,
-      publishedTime: item.date ? new Date(item.date).toISOString() : undefined,
+      publishedTime: safeIsoString(item.date),
     }),
   };
 }

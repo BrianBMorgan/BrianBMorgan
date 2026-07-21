@@ -7,7 +7,7 @@ import { mdxComponents } from '@/components/mdx-components';
 import { JsonLd } from '@/components/JsonLd';
 import { formatDate, getArticle, getArticles, readingTime } from '@/lib/content';
 import { site } from '@/lib/site';
-import { articleLd, branded, breadcrumbLd, socialMeta } from '@/lib/seo';
+import { articleLd, branded, breadcrumbLd, safeIsoString, socialMeta } from '@/lib/seo';
 
 export function generateStaticParams() {
   return getArticles().map((a) => ({ slug: a.slug }));
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
       description: article.summary,
       path: `/thought-leadership/${slug}`,
       type: 'article',
-      publishedTime: article.date ? new Date(article.date).toISOString() : undefined,
+      publishedTime: safeIsoString(article.date),
     }),
   };
 }
