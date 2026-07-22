@@ -7,7 +7,14 @@ import { mdxComponents } from '@/components/mdx-components';
 import { JsonLd } from '@/components/JsonLd';
 import { formatDate, getArticle, getArticles, readingTime } from '@/lib/content';
 import { site } from '@/lib/site';
-import { articleLd, branded, breadcrumbLd, safeIsoString, socialMeta } from '@/lib/seo';
+import { articleLd, branded, breadcrumbLd, faqLd, safeIsoString, socialMeta } from '@/lib/seo';
+
+// Forge-published articles carry `source: forge`. Their bodies are rendered
+// as plain markdown (format: 'md') so arbitrary prose — a stray "<" or "{" —
+// can't be parsed as JSX and break the static build. Hand-written .mdx essays
+// (no source flag) keep full MDX so their <Figure>/<Video> components work.
+const mdxOptionsFor = (article) =>
+  article.source === 'forge' ? { mdxOptions: { format: 'md' } } : undefined;
 
 export function generateStaticParams() {
   return getArticles().map((a) => ({ slug: a.slug }));
@@ -25,6 +32,7 @@ export async function generateMetadata({ params }) {
       description: article.summary,
       path: `/thought-leadership/${slug}`,
       type: 'article',
+      image: article.hero || undefined,
       publishedTime: safeIsoString(article.date),
     }),
   };
@@ -35,6 +43,12 @@ export default async function ArticlePage({ params }) {
   const article = getArticle(slug);
   if (!article) notFound();
 
+  // FAQs (from Forge frontmatter) → FAQPage schema. The same Q&A is also
+  // present in the rendered body, so the schema mirrors visible content.
+  const faqs = Array.isArray(article.faqs)
+    ? article.faqs.map((f) => ({ q: f.question, a: f.answer })).filter((f) => f.q && f.a)
+    : [];
+
   return (
     <article
       className="container"
@@ -43,6 +57,7 @@ export default async function ArticlePage({ params }) {
       <JsonLd
         data={[
           articleLd(article),
+          ...(faqs.length ? [faqLd(faqs)] : []),
           breadcrumbLd([
             { name: 'Home', path: '/' },
             { name: 'Thought leadership', path: '/thought-leadership' },
@@ -106,8 +121,23 @@ export default async function ArticlePage({ params }) {
         )}
       </header>
 
+      {article.hero && (
+        // Forge hero image (absolute CDN URL, so no base-path prefixing).
+        <img
+          src={article.hero}
+          alt=""
+          style={{
+            width: '100%',
+            borderRadius: 'var(--radius-lg)',
+            border: '1px solid var(--border-subtle)',
+            margin: '0 0 var(--space-7)',
+            display: 'block',
+          }}
+        />
+      )}
+
       <div className="prose">
-        <MDXRemote source={article.body} components={mdxComponents} />
+        <MDXRemote source={article.body} components={mdxComponents} options={mdxOptionsFor(article)} />
       </div>
 
       <footer
