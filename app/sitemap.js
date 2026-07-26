@@ -5,7 +5,7 @@ import { site } from '@/lib/site';
 export const dynamic = 'force-static';
 
 export default function sitemap() {
-  const staticRoutes = ['', '/about', '/work', '/thought-leadership', '/contact'].map((p) => ({
+  const staticRoutes = ['', '/about', '/work', '/thought-leadership', '/resume', '/contact'].map((p) => ({
     url: `${site.url}${p}`,
   }));
   const categoryRoutes = WORK_CATEGORIES.map((c) => ({ url: `${site.url}/work/${c.slug}` }));

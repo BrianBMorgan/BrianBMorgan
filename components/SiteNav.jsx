@@ -174,6 +174,9 @@ export function SiteNav() {
           <Link href="/thought-leadership" style={linkStyle(isActive('/thought-leadership'))}>
             Thought leadership
           </Link>
+          <Link href="/resume" style={linkStyle(isActive('/resume'))}>
+            Résumé
+          </Link>
           <Link href="/contact" style={linkStyle(isActive('/contact'))}>
             Contact
           </Link>
@@ -250,6 +253,9 @@ export function SiteNav() {
             style={linkStyle(isActive('/thought-leadership'))}
           >
             Thought leadership
+          </Link>
+          <Link href="/resume" style={linkStyle(isActive('/resume'))}>
+            Résumé
           </Link>
           <Link href="/contact" style={linkStyle(isActive('/contact'))}>
             Contact

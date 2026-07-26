@@ -10,6 +10,7 @@ export {
   Check,
   ChevronDown,
   Clock,
+  Download,
   ExternalLink,
   Mail,
   MapPin,

@@ -199,3 +199,64 @@ html {
 .prose hr {
   margin: var(--space-8) 0;
 }
+
+/* ---- Résumé ---- */
+.resume-metalink {
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+.resume-metalink:hover {
+  color: var(--text-strong);
+}
+
+/* Print / Save-as-PDF: strip the site chrome and lay the résumé out as a
+   clean letter-width document. window.print() (the Download PDF button) and
+   the browser's own print both use this. Backgrounds/accents are forced on so
+   the gold rules and sage skill tags survive the export. */
+@media print {
+  @page {
+    margin: 0.5in;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: var(--white);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Site nav + footer are direct children of <body>; drop them for print. */
+  body > header,
+  body > footer,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Use the full page width — no centered container, no sticky offsets. */
+  .container {
+    max-width: none !important;
+    padding-inline: 0 !important;
+  }
+
+  main .container {
+    padding-top: 18px !important;
+  }
+
+  /* Keep the experience/rail two-column layout, tightened for paper. */
+  .resume-body.detail-grid {
+    grid-template-columns: 1fr 240px;
+    gap: 32px;
+  }
+
+  /* Don't split a role or a rail block across a page break. */
+  .resume-entry,
+  .resume-rail-block {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
