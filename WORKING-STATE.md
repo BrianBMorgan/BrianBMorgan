@@ -18,3 +18,5 @@
 - Wire the contact form to a real backend (currently composes a mailto: draft).
 - Later: self-host fonts with `next/font`.
 - Housekeeping candidates: prune ~32MB of unreferenced HiRes JPGs in `public/images/work/` (the web-sized derivatives are the ones the site uses); add a PR-time build check so automerge can't land a red build; delete the merged remote branches (`BrianBMorgan-patch-1`, `claude/brianbmorgan-design-folder-m8kg7w`).
+
+<!-- gemini-silence-check: temporary probe PR, will be closed -->
