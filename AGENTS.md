@@ -38,7 +38,7 @@ Contact form POSTs to the ForgeOS mailforge public relay (`site.contactEndpoint`
 - 1Password — service account ONLY; never the interactive "front door". Secrets live in the `Openclaw` vault. In the SAME shell, export the SA token FIRST, then read:
   `export OP_SERVICE_ACCOUNT_TOKEN="$(cat ~/.openclaw/credentials/onepassword/service-account-token)"` then `op read "op://Openclaw/<ITEM>/password"`.
   ⚠️ A bare `op read` WITHOUT that token exported silently falls back to interactive login and hangs you headlessly. Never run `op signin` / `op account add`. If an `op` call stalls, you skipped the export — set it and retry.
-- OpenClaw MCP (verify against your live tool list at boot): `mcp__gitnexus-remote__*`, `mcp__forgeos__*`, `mcp__gibson-memory__*`, `mcp__openclaw__*`, `mcp__composio__*`.
+- OpenClaw MCP (verify against your live tool list at boot): `mcp__gibson-memory__*`, `mcp__openclaw__*`, `mcp__composio__*`, `mcp__forgeos__*` (fleet plane — not yours; you POST to a mailforge relay, you do not own it). **`mcp__gitnexus-remote__*` is GONE** — Sandbox Brain / GitNexus was archived 2026-08-15 and `brain.makemysandbox.com` is dead. Retrieval is Cortex now (invariant 1).
 - **No database** in this repo. Never invent one. Never pull a raw prod connection string for any related service.
 - **Deploy path = GitHub Pages on push to `main`.** There is no Render service and no ForgeOS project for this site. Do not call `forgeos__publish` / `set_env` against anything claiming to be this portfolio.
 

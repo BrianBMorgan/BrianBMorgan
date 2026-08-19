@@ -34,3 +34,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OpenClaw harness — local-only, NEVER commit to this PUBLIC repo.
+# These were protected only by .git/info/exclude, which is local and does not
+# survive a re-clone; one `git add -A` after a fresh clone would have published
+# Brian's personal notes. Belt and braces. (2026-08-19)
+SOUL.md
+USER.md
+IDENTITY.md
+TOOLS.md
+GUARDRAILS.md
+HEARTBEAT.md
+PURPOSE.md
+MEMORY.md
+memory/
+.claude/
+openclaw-workspace-state.json
