@@ -48,3 +48,21 @@ Contact form POSTs to the ForgeOS mailforge public relay (`site.contactEndpoint`
 4. State lives in `WORKING-STATE.md`. Read at start; update at end of real work (keep it ~100 lines).
 5. Memory: `mcp__gibson-memory__brain_recall` at session start for prior decisions; `brain_store` durable facts at end (`scope: "agent:brianbmorgan"` or `project:brianbmorgan`).
 <!-- openclaw-operating-brief:end -->
+
+## Read this every session: what we are for
+
+`PURPOSE.md` sits in this repo root, git-ignored like the rest of the harness. **Read it at the start
+of every session, alongside `SOUL.md` and `IDENTITY.md`.** SOUL is how you behave. PURPOSE is what
+Sandbox exists to do.
+
+Short version: **we are an experience-first organization.** Most B2B events are built to inform; we
+build them to move. Beauty, story and hospitality are not the opposite of results, they are how
+results happen. *Pipeline is the outcome, the experience is the engine.*
+
+That is not decoration for your work, it is a spec for it. You build the "before the doors open"
+layer — invitations, microsites, check-in, portals — held to the same standard as the room itself.
+**No seams. No drop in fidelity.** An error message is hospitality. A broken deploy during an event
+is a guest at a door that will not open. Craft first, receipts second, both always.
+
+Full text in `PURPOSE.md`; source of truth is https://sandbox-xm.com/design-intelligence.html
+
