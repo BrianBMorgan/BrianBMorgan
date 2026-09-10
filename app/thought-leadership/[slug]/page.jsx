@@ -5,7 +5,9 @@ import { LinkButton } from '@/components/LinkButton';
 import { ArrowLeft } from '@/components/icons';
 import { mdxComponents } from '@/components/mdx-components';
 import { JsonLd } from '@/components/JsonLd';
+import { ForgeBeacon } from '@/components/ForgeBeacon';
 import { formatDate, getArticle, getArticles, readingTime } from '@/lib/content';
+import { beaconForArticle } from '@/lib/forge-beacon';
 import { site } from '@/lib/site';
 import { articleLd, branded, breadcrumbLd, faqLd, safeIsoString, socialMeta } from '@/lib/seo';
 
@@ -48,6 +50,11 @@ export default async function ArticlePage({ params }) {
   const faqs = Array.isArray(article.faqs)
     ? article.faqs.map((f) => ({ q: f.question, a: f.answer })).filter((f) => f.q && f.a)
     : [];
+
+  // Forge on-page beacon (pageview / scroll / read / CTA). Client injector
+  // so forge-beacon.js sees document.currentScript + data-* attrs. Only
+  // forge-sourced articles; brand map in lib/forge-beacon.js.
+  const beacon = beaconForArticle(article);
 
   return (
     <article
@@ -163,6 +170,10 @@ export default async function ArticlePage({ params }) {
           — {site.name}
         </span>
       </footer>
+
+      {beacon && (
+        <ForgeBeacon brandId={beacon.brandId} beaconKey={beacon.key} slug={slug} />
+      )}
     </article>
   );
 }
