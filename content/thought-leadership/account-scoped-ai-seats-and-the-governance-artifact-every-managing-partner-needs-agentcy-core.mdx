@@ -1,0 +1,78 @@
+---
+title: "Account-Scoped AI Seats and the Governance Artifact Every Managing Partner Needs"
+summary: "Account-scoped AI seats turn policy documents into a real audit trail, giving managing partners a usage record for every client account."
+date: "2026-10-07T03:35:25.911Z"
+source: forge
+brand: "agentcy-core"
+tags:
+  - "Article"
+  - "Agentcy Core"
+hero: "https://v3b.fal.media/files/b/0aad5f89/4osnTonwLVY1xIcqcDhxr_mcpjOFnc.jpg"
+faqs:
+  - question: "What does an account-scoped AI seat actually log?"
+    answer: "An account-scoped AI seat logs tool invocation, prompt context, output metadata, staff identity, and a timestamp every time it is used on that account. It records the event only: it does not interpret the output or validate its accuracy. A fact does not become durable in the account record until a named reviewer signs off on it."
+  - question: "How is an account-scoped seat different from a shared agency AI subscription?"
+    answer: "A shared subscription records a charge, nothing more. It does not show which client's work was involved, which staff member ran the tool, or what was produced. An account-scoped seat captures all of those fields automatically, because the account boundary is enforced before the tool runs, not reconstructed afterward."
+  - question: "Can an agency share its AI usage log directly with a client?"
+    answer: "Yes. The per-account usage summary is built to travel: a managing partner can place it in front of a client at a quarterly review or produce it in response to an audit request. It shows which seat invoked which tool, on which date, against which prompt context, producing which class of output."
+  - question: "What does a single-tenant instance mean for a client's legal team?"
+    answer: "It means the inference layer serving one client account is never shared with another, and no model is trained on commingled client data. Because that boundary is enforced at the infrastructure level rather than a per-project setting, it can be documented as an architectural property instead of a staff assurance. A legal reviewer asking for evidence of data isolation receives documentation of the architecture, not a promise."
+  - question: "Does Agentcy Core include a client portal or client login?"
+    answer: "No. Agentcy Core ships no client portal and no client logins, by design. That scope decision removes an entire category of access-control risk before it needs managing, rather than adding a permission setting to control it after the fact."
+  - question: "What should go into an internal AI use policy beyond a statement of intent?"
+    answer: "A credible policy references seat assignments tied to named individuals, account boundaries enforced at the system level, a specific output retention period, and a documented exception process for tool use outside the governed environment. Each element anchors to a control that exists independent of the policy document itself."
+---
+
+> **TL;DR** — Agency AI policies describe intent; they do not produce a record. Account-scoped AI seats, paired with single-tenant instances, log tool invocation, prompt context, and staff identity against a single client account automatically, generating a usage summary a managing partner can hand a client at a quarterly review or produce for an audit request. The record exists because the architecture enforces it, not because someone remembered to write it down.
+
+A client contact is preparing for a quarterly business review. Buried in the agenda: a question about how the agency's team has been using AI on their account. The managing partner reaches for the obvious answer, a policy document. It states intent and names approved tools, but it does not say who used what, when, or on which deliverable. That gap is not hypothetical. In our experience, most agencies in the 25 to 60 person range have a policy and no record behind it. A client is not asking what the agency believes about AI governance. They are asking what the agency can show them. Those are different questions, and only one of them has an answer sitting in a drawer. Closing that gap takes infrastructure, not another document: account-scoped AI seats, single-tenant instances, and a usage record that gets generated without anyone having to remember to keep it.
+
+## Shadow AI and the Expense Report Problem
+
+Shadow AI is not a hypothetical. It is staff running personal ChatGPT, Gemini, or Midjourney accounts against client briefs, charged to a corporate card or paid for out of pocket because expensing it felt awkward. The immediate risk is not a data breach. It is simpler and more common: an accountability gap. When a client asks which AI tools touched their account last quarter, the honest answer is often that no one knows. Not because the agency is careless, but because the subscription was never scoped to the account in the first place. An expense report, if one exists at all, records a charge. It does not record which client benefited, which staff member ran the tool, what the prompt contained, or what came out the other end. That is the cost, in audit terms, before it is ever a brand problem. A managing partner cannot produce a per-account usage record because there is no per-account record to produce.
+
+## What Does an Account-Scoped AI Seat Actually Record?
+
+An account-scoped AI seat records tool invocation, prompt context, output metadata, staff identity, and a timestamp, every time a staff member uses an AI tool on that account. It does not interpret what the output meant, validate its accuracy, or treat a document read as a fact the account now believes. An account-scoped AI seat is a named license tied to a single client account rather than shared across the agency. It works by routing every tool call through that account's boundary, so prompt context, output, and invoking identity are logged against the account before the tool runs, not reconstructed afterward. An agent reading a client brief logs a read event. It does not log a belief. The fact does not become durable in the account's working knowledge, its ratification trail, until a named person reviews it and signs off. That architectural decision, requiring human review before any fact becomes durable in an account record, was made early and held deliberately. The restraint is the feature. An agency evaluating AI governance tools that overclaim should notice what gets declined to automate here.
+
+## Single-Tenant Instances: Why the Infrastructure Boundary Matters to a Client's Legal Team
+
+A client's legal team does not ask whether the agency trusts its AI vendor. They ask for documentation. Single-tenant isolation gives the managing partner something to hand over: each agency runs on its own instance and its own database, with no shared inference layer between accounts and no model trained on commingled client data. That boundary is enforced at the infrastructure level. It does not depend on a staff member remembering to flip a setting on a new project. A documented architecture is auditable. A configuration choice is not, because configuration choices get forgotten under deadline pressure. Agentcy Core ships no client portal and no client logins. That is a scope decision, not an oversight. Removing the client-facing interface removes an entire category of access-control risk before anyone has to manage it. Where the seat boundary stops is exactly where the client's confidence begins.
+
+## Building the Governance Artifact: Turning Usage Logs Into a Client-Facing Record
+
+The practical move for a managing partner is turning a pile of usage data into something a client can read. A per-account AI usage summary is what gets placed in front of a client at a quarterly review, or produced in response to an audit request. It names which seat invoked which tool, on which date, against which prompt context, producing which class of output. That record is a byproduct of the architecture, not a report someone assembles after the fact. Because the seat boundary is enforced before any tool call runs, the fields are captured automatically: no one has to remember to log them. The agency that can produce this record at a quarterly review is operating at a different level of accountability than the agency that can only produce a policy statement. That difference speaks for itself.
+
+## Writing an Internal AI Use Policy That References Real Controls, Not Aspirations
+
+Most agency AI use policies describe intent. A policy that references real controls instead reads differently. Build it around four elements. First, assign seats to named individuals, not job titles, so every log entry ties to a person who can be asked a question. Second, enforce account boundaries at the system level, not through a self-reported rule staff are expected to follow. Third, set a specific output retention period, not a general promise to keep records. Fourth, document an exception-handling process for tool use outside the governed environment, with a log entry required before or immediately after. The policy references those controls. The controls exist independent of the policy. That is the difference between a policy that functions as a receipt and one that functions as an aspiration. Keep the document dry and structural. The reader evaluating it is not looking for encouragement. They are looking for a structure they can implement this quarter.
+
+## What Agentcy Core Records, What It Does Not, and Why That Distinction Is the Point
+
+Agentcy Core's audit trail is precise about what it covers. Every seat logs tool invocation, prompt context, output metadata, staff identity, and a timestamp, scoped to a single account on a single-tenant instance. It is equally precise about what falls outside that scope. The system does not interpret outputs. It does not validate accuracy. It does not generate client-facing reports automatically, and it does not enforce compliance with any regulatory framework on an agency's behalf. That boundary is deliberate, not a gap waiting to be closed. A system that claims less but records precisely is more defensible in a client conversation than one that claims more and hands over a managed summary nobody can fully explain. A managing partner handing a per-account usage log to a client's legal reviewer is handing them something the infrastructure produced, not something a staff member assembled under deadline pressure the night before the review. For a managing partner deciding where to start: look at the accounts with the most staff turnover or the heaviest AI tool use first. Those are the accounts where the record would have mattered most last quarter, and where building one now closes the gap before a client asks the question directly.
+
+## Frequently asked questions
+
+### What does an account-scoped AI seat actually log?
+
+An account-scoped AI seat logs tool invocation, prompt context, output metadata, staff identity, and a timestamp every time it is used on that account. It records the event only: it does not interpret the output or validate its accuracy. A fact does not become durable in the account record until a named reviewer signs off on it.
+
+### How is an account-scoped seat different from a shared agency AI subscription?
+
+A shared subscription records a charge, nothing more. It does not show which client's work was involved, which staff member ran the tool, or what was produced. An account-scoped seat captures all of those fields automatically, because the account boundary is enforced before the tool runs, not reconstructed afterward.
+
+### Can an agency share its AI usage log directly with a client?
+
+Yes. The per-account usage summary is built to travel: a managing partner can place it in front of a client at a quarterly review or produce it in response to an audit request. It shows which seat invoked which tool, on which date, against which prompt context, producing which class of output.
+
+### What does a single-tenant instance mean for a client's legal team?
+
+It means the inference layer serving one client account is never shared with another, and no model is trained on commingled client data. Because that boundary is enforced at the infrastructure level rather than a per-project setting, it can be documented as an architectural property instead of a staff assurance. A legal reviewer asking for evidence of data isolation receives documentation of the architecture, not a promise.
+
+### Does Agentcy Core include a client portal or client login?
+
+No. Agentcy Core ships no client portal and no client logins, by design. That scope decision removes an entire category of access-control risk before it needs managing, rather than adding a permission setting to control it after the fact.
+
+### What should go into an internal AI use policy beyond a statement of intent?
+
+A credible policy references seat assignments tied to named individuals, account boundaries enforced at the system level, a specific output retention period, and a documented exception process for tool use outside the governed environment. Each element anchors to a control that exists independent of the policy document itself.
