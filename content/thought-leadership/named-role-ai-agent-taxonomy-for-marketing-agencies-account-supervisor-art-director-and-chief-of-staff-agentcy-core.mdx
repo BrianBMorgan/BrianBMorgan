@@ -1,0 +1,115 @@
+---
+title: "Named-Role AI Agent Taxonomy for Marketing Agencies: Account Supervisor, Art Director, and Chief of Staff"
+summary: "Agentcy Core gives agencies a named-role AI taxonomy: Account Supervisor, Art Director, and Chief of Staff, each scoped to one job."
+date: "2026-10-19T03:25:40.817Z"
+source: forge
+brand: "agentcy-core"
+tags:
+  - "Article"
+  - "Agentcy Core"
+hero: "https://v3b.fal.media/files/b/0aaef48f/6tbrMvzqxJCP9xZDzopG3_s14WZiMI.jpg"
+faqs:
+  - question: "What is a named-role AI agent taxonomy, and how is it different from a single AI assistant?"
+    answer: "A named-role AI agent taxonomy assigns distinct jobs, such as Account Supervisor, Art Director, and Chief of Staff, to separate functions instead of handing everything to one generalized assistant. Each role writes only to its own part of the account record, so output can be attributed and reviewed by function. A single undifferentiated agent cannot make that distinction, which means its record cannot be audited by role when something needs review."
+  - question: "What is the Account Supervisor agent designed to monitor?"
+    answer: "The Account Supervisor is designed to monitor account-level activity: brief status, the age of open follow-ups, flagged renewal risk signals, and open commitments logged against the account. It is built to surface that information to a human account lead, not to contact the client or initiate a next step on its own. It is also scoped to never retrieve another account's facts."
+  - question: "How does the Art Director agent work without sending or publishing anything on its own?"
+    answer: "The Art Director is designed to handle brief intake, asset routing, and feedback logging, writing its output into the shared account record without overwriting what other roles have set there. Gmail and Outlook operations produce unsent drafts only, and a designed page is delivered as a downloadable file rather than published or hosted by the platform. A person still sends the message and still ships the final asset."
+  - question: "How does the Chief of Staff agent get cross-account visibility without accessing client-confidential data?"
+    answer: "The Chief of Staff is designed to hold a cross-account signal layer, not the client-confidential context that generated those signals. It can surface that an account has stale activity, or that a capacity conflict exists across the book, without reading the brief, the follow-up thread, or any client-specific record from the accounts involved. Cross-account visibility does not require cross-account data access when the system is built to surface signals rather than the underlying context."
+  - question: "Why can't a single AI agent safely hold an entire client account?"
+    answer: "A single agent asked to hold account strategy, task tracking, and client communication at once cannot sort its own output by function, a failure mode worth naming as scope collapse. A deliverable status update and a renewal risk flag end up in the same thread with no clear owner, and information from one function can bleed into the framing of another. Named, function-scoped roles fix this by giving each job its own lane in the record."
+  - question: "What questions should an agency operator ask when evaluating any AI agent architecture?"
+    answer: "Four questions apply to any system, not just one vendor: can you identify which named role produced each output, is the audit log scoped by account, where does client-confidential context stop and how is that boundary enforced, and what is the process for a human to review or override an action before it changes the record. A system that handles three of these well can still fail on the one it doesn't address."
+---
+
+> **TL;DR** — A single AI agent asked to hold account strategy, task tracking, and client communication at once collapses its own scope, producing an unauditable record. Agentcy Core's named-role taxonomy of Account Supervisor, Art Director, and Chief of Staff solves this by giving each seat one job and one part of the record to write to. Agencies get an architecture they can inspect, not a single assistant they have to trust blindly.
+
+When a senior account lead resigns, the brief does not resign with her, but in most agencies it might as well. Dana, founder and COO of a composite 30-person marketing agency running 20 client accounts (a composite persona, not a real individual), lived a version of this. A senior account lead left mid-quarter. The renewal risk flags, the open follow-ups, the half-finished context on three accounts: all of it lived in one person's head, one inbox, one set of private notes. The account did not hold the knowledge. The person did.
+
+That is not a staffing problem. It is an architecture problem. Most AI tools built for agencies make it worse, not better, by handing an entire client account to a single undifferentiated assistant with no boundary between what it tracks, what it decides, and what it is allowed to touch.
+
+## Why a Single AI Agent Cannot Hold a Full Client Account
+
+Ask one AI agent to hold account strategy, task tracking, and client communication at the same time, and it cannot sort its own output by function. Neither can the person reading it. Call this scope collapse: the record becomes unauditable because no line in it carries a clear owner. A deliverable status update and a renewal risk flag land in the same thread, in the same voice, with no way to tell which function produced which line.
+
+A second failure mode compounds the first. Context bleed happens when information from one function, a creative routing decision, for example, quietly reshapes the framing of another, like account health scoring. The agent does not distinguish what it was asked to track from what it merely observed in passing. Over weeks, the record stops being a record. It becomes one long transcript nobody fully trusts.
+
+The fix is not a smarter single agent. It is named seats on one account, each scoped to a job, each writing to its own part of a record a human can actually inspect.
+
+## A Named-Role Taxonomy: How Agent Seats Map to Agency Functions
+
+A named-role AI agent taxonomy is an architecture that assigns distinct jobs, rather than one generalized assistant, to separate functions inside and across client accounts. It works by scoping each role to one part of the account record, so output can be attributed, reviewed, and audited by function instead of treated as a single undifferentiated stream.
+
+The reasoning behind this design is straightforward: a single undifferentiated agent asked to hold account strategy, task tracking, and client communication simultaneously will collapse its own scope. It cannot tell you which part of its output belongs to which function, and neither can you. Named roles with distinct jobs fix that. Each seat writes to one part of the record, and the record stays readable. This is the architectural logic reflected in Agentcy Core's pre-beta design approach, though the company has not published formal documentation detailing the taxonomy.
+
+In practice, the taxonomy has three layers. The Account Supervisor is scoped to one account and monitors account-level activity. Function-scoped roles, such as the Art Director, sit on that same account but write only to their part of the shared record. The Chief of Staff sits above individual accounts with cross-account visibility, and holds none of the client-confidential context underneath it. The organizing principle: each role writes to one part of the record, and no role overwrites context set by another. A reader could use this structure alone, without anything else in this article, to evaluate any agentic system claiming to serve agencies.
+
+## Account Supervisor Agent: What It Is Designed to Track and Where It Stops
+
+Dana's scenario above is illustrative, meant to show the gap the role addresses, not a confirmed customer outcome. The Account Supervisor role is the architectural response to it: it is designed to hold the account record at the account level rather than in a person's memory, and to surface stale activity and open commitments before they become a client escalation.
+
+In concrete terms, the role is built to monitor brief status, the age of open follow-ups, flagged renewal risk signals, and commitments logged against the account. It is not designed to contact the client, approve a deliverable, or initiate a next step without a human ratifying the action first. It is also built never to retrieve another account's facts: each Account Supervisor is scoped to one account and stops at that boundary by design, not by operator configuration.
+
+The principle holds across every account: the account holds the knowledge, the agent surfaces it, and the person decides what happens next.
+
+## Art Director and Specialist Agents: Function-Scoped Roles on a Shared Account
+
+A function-scoped agent is designed to handle a narrower job than the Account Supervisor: brief intake, asset routing, and feedback logging. Its output feeds the shared account record without overwriting context another role already set. A creative routing decision logged by the Art Director does not alter the account health framing held by the Account Supervisor. Same account, different lane.
+
+The Art Director is also built around a deliberate limit: it does not send email or publish on its own. Gmail and Outlook operations produce unsent drafts only, and a designed page is a downloadable file, not something the platform hosts or publishes to a URL. A human still presses send and still ships the final asset.
+
+Any additional specialist seat an agency might add later, a PR placement role or a media buyer role, follows the same pattern: a defined job, a defined slice of the record it writes to, and no authority to act on a client without human review.
+
+## Chief of Staff Agent: Designed for Cross-Account Visibility, Not Client Contact
+
+Start with the boundary, because it matters more than the function: the Chief of Staff does not communicate with clients, and it does not hold client-confidential context from individual accounts. It cannot make a fact live on any account.
+
+What it is designed to do sits above that boundary. It surfaces capacity conflicts across the book, flags accounts with stale activity, and keeps an operator's view of the full roster current, without reading the brief, the follow-up thread, or any client-specific record underneath the signal. The Account Supervisor is scoped to one account and holds account-level detail. The Chief of Staff holds a cross-account signal layer and nothing below it.
+
+That is the whole design principle, stated plainly: cross-account visibility does not require cross-account data access if the architecture is built to surface signals rather than the client context that generated them.
+
+## The Inspectable Record: How Each Agent Role Writes to a Shared Log
+
+Named roles only matter if their output is auditable, and that depends on how the log underneath them is built. Every agent action writes an attributed entry to a shared log a human account lead can review. Three properties make that log useful rather than decorative.
+
+First, the log is scoped by account, so an entry for one client never appears inside the record for another. Second, it is readable by the assigned team for that account, not by anyone with general system access. Third, it distinguishes which role produced which entry, so the account lead can tell whether a flag came from the Account Supervisor or from a function-scoped role like the Art Director.
+
+Helping and changing the record are two different acts, and the log is built to make that distinction visible. An agent surfacing a stale follow-up requires no write to the record. An agent logging a new commitment does. Because the record is scoped by account and readable only by the assigned team, cross-client data bleed is an architectural failure mode the design is built to prevent, not a policy an operator has to remember to configure.
+
+## Evaluating Agent Architecture: Four Questions an Agency Operator Should Ask
+
+This is a vendor-neutral evaluation frame. Apply it to any agentic system claiming to serve agencies, Agentcy Core included.
+
+1. Identify ownership: can you tell which named role produced each output in the account record, or does the system surface one undifferentiated stream?
+2. Check the scope of the log: is the audit trail scoped by account, or does cross-account activity show up in the same record?
+3. Find the boundary: where does client-confidential context from one account stop, and does the system enforce that boundary structurally, or does it rely on the operator to configure it correctly?
+4. Confirm the override: what is the process for a human account lead to review, reject, or override an agent action before it changes the record?
+
+These four questions are designed to surface scope, auditability, data boundaries, and human override process as a set. A system that answers three of them well can still fail on the one it doesn't address, and for an agency holding client-confidential work, that one gap is the only one that counts.
+
+## Frequently asked questions
+
+### What is a named-role AI agent taxonomy, and how is it different from a single AI assistant?
+
+A named-role AI agent taxonomy assigns distinct jobs, such as Account Supervisor, Art Director, and Chief of Staff, to separate functions instead of handing everything to one generalized assistant. Each role writes only to its own part of the account record, so output can be attributed and reviewed by function. A single undifferentiated agent cannot make that distinction, which means its record cannot be audited by role when something needs review.
+
+### What is the Account Supervisor agent designed to monitor?
+
+The Account Supervisor is designed to monitor account-level activity: brief status, the age of open follow-ups, flagged renewal risk signals, and open commitments logged against the account. It is built to surface that information to a human account lead, not to contact the client or initiate a next step on its own. It is also scoped to never retrieve another account's facts.
+
+### How does the Art Director agent work without sending or publishing anything on its own?
+
+The Art Director is designed to handle brief intake, asset routing, and feedback logging, writing its output into the shared account record without overwriting what other roles have set there. Gmail and Outlook operations produce unsent drafts only, and a designed page is delivered as a downloadable file rather than published or hosted by the platform. A person still sends the message and still ships the final asset.
+
+### How does the Chief of Staff agent get cross-account visibility without accessing client-confidential data?
+
+The Chief of Staff is designed to hold a cross-account signal layer, not the client-confidential context that generated those signals. It can surface that an account has stale activity, or that a capacity conflict exists across the book, without reading the brief, the follow-up thread, or any client-specific record from the accounts involved. Cross-account visibility does not require cross-account data access when the system is built to surface signals rather than the underlying context.
+
+### Why can't a single AI agent safely hold an entire client account?
+
+A single agent asked to hold account strategy, task tracking, and client communication at once cannot sort its own output by function, a failure mode worth naming as scope collapse. A deliverable status update and a renewal risk flag end up in the same thread with no clear owner, and information from one function can bleed into the framing of another. Named, function-scoped roles fix this by giving each job its own lane in the record.
+
+### What questions should an agency operator ask when evaluating any AI agent architecture?
+
+Four questions apply to any system, not just one vendor: can you identify which named role produced each output, is the audit log scoped by account, where does client-confidential context stop and how is that boundary enforced, and what is the process for a human to review or override an action before it changes the record. A system that handles three of these well can still fail on the one it doesn't address.
