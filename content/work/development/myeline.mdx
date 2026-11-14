@@ -1,0 +1,33 @@
+---
+title: Myeline
+kind: AI Infrastructure
+summary: Persistent memory for AI assistants, with receipts. A hosted memory layer that plugs into Claude, ChatGPT, and any MCP client, where every memory is a fact with its source attached and nothing goes live until a person approves it.
+date: 2026-11-13
+year: '2026'
+role: 'Founder: product, design, and engineering'
+status: Live
+featured: false
+tags:
+  - AI
+  - Infrastructure
+  - MCP
+  - SaaS
+cover: /images/work/Myeline-landing.png
+link: https://myeline.si
+---
+
+Myeline is the memory layer I designed, built, and run for AI assistants that people actually use: Claude, ChatGPT, and anything that speaks MCP. The premise is simple and nobody else ships it honestly. Memory with receipts. Every memory is a fact with its source attached, machines propose and humans approve, and forgetting takes a reason.
+
+## The work
+
+I own the platform end to end, bootstrapped from Portland and launched in November 2026. The system runs as a hosted MCP server on my own infrastructure: Postgres on Neon, deploys through Coolify, OAuth with refresh-token rotation so connected clients survive past their first month instead of silently dying on day 30. A signed-in workspace is the human half: review the staged facts, approve what is true, watch every recall carry its source.
+
+The engineering bar the product holds itself to is the unusual part. Nothing is claimed about the system that the system does not measure. When a compliance rewrite changed the words every connected AI reads, I ran a hundred scripted client sessions across two AI platforms and two eras of the copy, counted behavior from the database rather than from screenshots, and proved the rewrite cut unwanted write requests to zero without costing recall. The approval gate held against every unprompted write in every run. That measurement ships with the product, re-runnable any time the copy changes again.
+
+<Figure src="/images/work/Myeline-receipts.png" alt="Myeline landing page: a real Claude conversation recalling approved restaurants in Lisbon beside the measured token cost of building memory versus recalling it" caption="RECEIPTS, MEASURED · A REAL RECALL FROM A REAL PHONE, WITH THE TOKEN MATH ON BOTH SIDES" />
+
+Distribution was built the same way the product was, one open standard at a time. Myeline is published in the official MCP Registry, listed in ChatGPT's connector catalog, verified in the OpenAI Business Hub, and packaged for the Claude, Grok, and Hermes plugin ecosystems. One memory, every storefront, no lock-in.
+
+## Where it stands
+
+Live and self-serve at myeline.si, with a free tier and a paid plan, serving real recalls to real connected clients every day. The road ahead is the one the receipts point down: richer attribution for teams, deeper cohort visibility for operators, and the connector ecosystem as it matures. Myeline is built for people whose AI assistants do real work across real weeks, who want the assistant to remember what was decided and be able to prove why it knows.
